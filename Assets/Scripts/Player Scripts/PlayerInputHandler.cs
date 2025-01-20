@@ -17,12 +17,11 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler> {
     public static event Action<Vector2, InputActionPhase> MoveEvent;
     public static event Action<Vector2, InputActionPhase> LookEvent;
     
-    public static event Action<InputActionPhase> JumpEvent;
+    public static event Action<InputActionPhase> SprintEvent;
     public static event Action<InputActionPhase> GuardEvent;
 
     public static event Action<InputActionPhase> BasicAttackEvent;
-    public static event Action<InputActionPhase> ManaChargeEvent;
-    public static event Action<InputActionPhase> UltimateEvent;
+    public static event Action<InputActionPhase> StrongAttackEvent;
 
     protected override void Awake(){
         base.Awake();
@@ -39,13 +38,12 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler> {
         OnEnable(_playerInputActions.Player.Movement, inputContext => IfPlayerAlive(() => MoveEvent?.Invoke(inputContext.ReadValue<Vector2>(), inputContext.phase)));
         OnEnable(_playerInputActions.Player.Look, inputContext => IfPlayerAlive(() => LookEvent?.Invoke(inputContext.ReadValue<Vector2>(), inputContext.phase)));
 
-        OnEnable(_playerInputActions.Player.Jump, inputContext => IfPlayerAlive(() => JumpEvent?.Invoke(inputContext.phase)));
+        OnEnable(_playerInputActions.Player.Sprint, inputContext => IfPlayerAlive(() => SprintEvent?.Invoke(inputContext.phase)));
 
         OnEnable(_playerInputActions.Player.Guard, inputContext => IfPlayerAlive(() => GuardEvent?.Invoke(inputContext.phase)));
 
         OnEnable(_playerInputActions.Player.BasicAttack, inputContext => IfPlayerAlive(() => BasicAttackEvent?.Invoke(inputContext.phase)));
-        OnEnable(_playerInputActions.Player.ManaCharge, inputContext => IfPlayerAlive(() => ManaChargeEvent?.Invoke(inputContext.phase)));
-        OnEnable(_playerInputActions.Player.Ultimate, inputContext => IfPlayerAlive(() => UltimateEvent?.Invoke(inputContext.phase)));
+        OnEnable(_playerInputActions.Player.StrongAttack, inputContext => IfPlayerAlive(() => StrongAttackEvent?.Invoke(inputContext.phase)));
     }
 
     private void OnDisable() {
@@ -56,13 +54,12 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler> {
         OnDisable(_playerInputActions.Player.Movement, inputContext => IfPlayerAlive(() => MoveEvent?.Invoke(inputContext.ReadValue<Vector2>(), inputContext.phase)));
         OnDisable(_playerInputActions.Player.Look, inputContext => IfPlayerAlive(() => LookEvent?.Invoke(inputContext.ReadValue<Vector2>(), inputContext.phase)));
 
-        OnDisable(_playerInputActions.Player.Jump, inputContext => IfPlayerAlive(() => JumpEvent?.Invoke(inputContext.phase)));
+        OnDisable(_playerInputActions.Player.Sprint, inputContext => IfPlayerAlive(() => SprintEvent?.Invoke(inputContext.phase)));
 
         OnDisable(_playerInputActions.Player.Guard, inputContext => IfPlayerAlive(() => GuardEvent?.Invoke(inputContext.phase)));
 
         OnDisable(_playerInputActions.Player.BasicAttack, inputContext => IfPlayerAlive(() => BasicAttackEvent?.Invoke(inputContext.phase)));
-        OnDisable(_playerInputActions.Player.ManaCharge, inputContext => IfPlayerAlive(() => ManaChargeEvent?.Invoke(inputContext.phase)));
-        OnDisable(_playerInputActions.Player.Ultimate, inputContext => IfPlayerAlive(() => UltimateEvent?.Invoke(inputContext.phase)));
+        OnDisable(_playerInputActions.Player.StrongAttack, inputContext => IfPlayerAlive(() => StrongAttackEvent?.Invoke(inputContext.phase)));
     }
 
     private void IfPlayerAlive(Action action)

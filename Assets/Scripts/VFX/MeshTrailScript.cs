@@ -13,8 +13,7 @@ public class MeshTrailScript : MonoBehaviour
     private SkinnedMeshRenderer[] _skinMeshRends;
 
     private void Start() {
-        PlayerEventSystem.OnCharacterBoostInEvent += ShowTrail;
-        PlayerEventSystem.OnCharacterBoostOutEvent += HideTrail;
+        
     }
 
     void ShowTrail(){

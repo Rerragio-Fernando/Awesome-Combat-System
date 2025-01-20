@@ -46,12 +46,12 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""Sprint"",
                     ""type"": ""Button"",
-                    ""id"": ""6bf74daf-8a98-48de-b071-9a4f6efdc3f3"",
+                    ""id"": ""c3850c04-eb2c-4093-b987-a471d2ac7af8"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -64,21 +64,12 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ManaCharge"",
+                    ""name"": ""StrongAttack"",
                     ""type"": ""Button"",
                     ""id"": ""0e644b44-6b17-4ac3-ba8a-1e3e67c6e951"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Ultimate"",
-                    ""type"": ""Button"",
-                    ""id"": ""923fca4e-af35-4005-835a-4e021370463f"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -120,28 +111,6 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard & Mouse"",
                     ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""150d2785-d381-47b7-aa2c-661f91c5e2f7"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""443c8d79-1fe4-4161-a740-72742de23938"",
-                    ""path"": ""<DualShockGamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -240,7 +209,7 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ManaCharge"",
+                    ""action"": ""StrongAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -251,29 +220,7 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ManaCharge"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b859207a-99be-49bd-b391-b98f0788f897"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Ultimate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d29b2610-6469-4397-ac6d-be260127024f"",
-                    ""path"": ""<Mouse>/backButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Ultimate"",
+                    ""action"": ""StrongAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -307,6 +254,17 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""264ab74a-1bcc-4896-98e7-5ae784876ffd"",
+                    ""path"": ""<DualShockGamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -375,10 +333,9 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_BasicAttack = m_Player.FindAction("BasicAttack", throwIfNotFound: true);
-        m_Player_ManaCharge = m_Player.FindAction("ManaCharge", throwIfNotFound: true);
-        m_Player_Ultimate = m_Player.FindAction("Ultimate", throwIfNotFound: true);
+        m_Player_StrongAttack = m_Player.FindAction("StrongAttack", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Guard = m_Player.FindAction("Guard", throwIfNotFound: true);
         // UI
@@ -453,10 +410,9 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_BasicAttack;
-    private readonly InputAction m_Player_ManaCharge;
-    private readonly InputAction m_Player_Ultimate;
+    private readonly InputAction m_Player_StrongAttack;
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Guard;
     public struct PlayerActions
@@ -465,10 +421,9 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
         public PlayerActions(@IA_Player wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @BasicAttack => m_Wrapper.m_Player_BasicAttack;
-        public InputAction @ManaCharge => m_Wrapper.m_Player_ManaCharge;
-        public InputAction @Ultimate => m_Wrapper.m_Player_Ultimate;
+        public InputAction @StrongAttack => m_Wrapper.m_Player_StrongAttack;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Guard => m_Wrapper.m_Player_Guard;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -486,18 +441,15 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
             @BasicAttack.started += instance.OnBasicAttack;
             @BasicAttack.performed += instance.OnBasicAttack;
             @BasicAttack.canceled += instance.OnBasicAttack;
-            @ManaCharge.started += instance.OnManaCharge;
-            @ManaCharge.performed += instance.OnManaCharge;
-            @ManaCharge.canceled += instance.OnManaCharge;
-            @Ultimate.started += instance.OnUltimate;
-            @Ultimate.performed += instance.OnUltimate;
-            @Ultimate.canceled += instance.OnUltimate;
+            @StrongAttack.started += instance.OnStrongAttack;
+            @StrongAttack.performed += instance.OnStrongAttack;
+            @StrongAttack.canceled += instance.OnStrongAttack;
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
@@ -514,18 +466,15 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
             @BasicAttack.started -= instance.OnBasicAttack;
             @BasicAttack.performed -= instance.OnBasicAttack;
             @BasicAttack.canceled -= instance.OnBasicAttack;
-            @ManaCharge.started -= instance.OnManaCharge;
-            @ManaCharge.performed -= instance.OnManaCharge;
-            @ManaCharge.canceled -= instance.OnManaCharge;
-            @Ultimate.started -= instance.OnUltimate;
-            @Ultimate.performed -= instance.OnUltimate;
-            @Ultimate.canceled -= instance.OnUltimate;
+            @StrongAttack.started -= instance.OnStrongAttack;
+            @StrongAttack.performed -= instance.OnStrongAttack;
+            @StrongAttack.canceled -= instance.OnStrongAttack;
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
@@ -617,10 +566,9 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
     {
         void OnLook(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
         void OnBasicAttack(InputAction.CallbackContext context);
-        void OnManaCharge(InputAction.CallbackContext context);
-        void OnUltimate(InputAction.CallbackContext context);
+        void OnStrongAttack(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
     }

@@ -9,24 +9,15 @@ public class PlayerEventSystem : GameCharacterEventSystem
     public static event Action OnCharacterIdleEvent;
     public static event Action OnCharacterWalkEvent;
     public static event Action OnCharacterRunEvent;
-    public static event Action OnCharacterJumpEvent;
+    public static event Action<float> OnCharacterTurnEvent;
 
-    public static event Action OnCharacterAttackTriggerEvent;
+    public static event Action OnCharacterBasicAttackTriggerEvent;
+    public static event Action OnCharacterStrongAttackTriggerEvent;
+    public static event Action<CombatState> CombatStateEvent;
     public static event Action OnSuccessfulHitEvent;
     public static event Action OnResetComboEvent;
-    public static event Action OnCharacterManaChargeTriggerEvent;
-    public static event Action<bool> OnCharacterGuardEvent;
-
-    public static event Action OnUltimateTriggeredIn;
-    public static event Action OnUltimateAttackEvent;
-    public static event Action OnUltimateTriggeredOut;
-
-    public static event Action OnBattleFocusInEvent;
-    public static event Action OnBattleFocusOutEvent;
 
     public static event Action OnForwardStepEvent;
-    public static event Action OnCharacterBoostInEvent;
-    public static event Action OnCharacterBoostOutEvent;
 
     public static event Action OnAnimationJumpForceEvent;
 
@@ -42,17 +33,20 @@ public class PlayerEventSystem : GameCharacterEventSystem
     public static void CharacterRun(){
         OnCharacterRunEvent?.Invoke();
     }
-    public static void CharacterJump(){
-        OnCharacterJumpEvent?.Invoke();
-    }
-    public static void AnimationJump(){
-        OnAnimationJumpForceEvent?.Invoke();
+    public static void CharacterTurn(float val){
+        OnCharacterTurnEvent?.Invoke(val);
     }
     #endregion
 
     #region Attacks
-    public static void TriggerAttack(){
-        OnCharacterAttackTriggerEvent?.Invoke();
+    public static void TriggerBasicAttack(){
+        OnCharacterBasicAttackTriggerEvent?.Invoke();
+    }
+    public static void TriggerStrongAttack(){
+        OnCharacterStrongAttackTriggerEvent?.Invoke();
+    }
+    public static void CombatState(CombatState cs){
+        CombatStateEvent?.Invoke(cs);
     }
     public static void TriggerSuccessfulHit(){
         OnSuccessfulHitEvent?.Invoke();
@@ -60,47 +54,11 @@ public class PlayerEventSystem : GameCharacterEventSystem
     public static void TriggerResetCombo(){
         OnResetComboEvent?.Invoke();
     }
-    public static void TriggerManaCharge(){
-        OnCharacterManaChargeTriggerEvent?.Invoke();
-    }
-    #endregion
-
-    #region Ultimate
-    public static void TriggerUltimateIn(){
-        OnUltimateTriggeredIn?.Invoke();
-    }
-    public static void TriggerUltimateAttack(){
-        OnUltimateAttackEvent?.Invoke();
-    }
-    public static void TriggerUltimateOut(){
-        OnUltimateTriggeredOut?.Invoke();
-    }
-    #endregion
-
-    #region Guard
-    public static void TriggerGuard(bool val){
-        OnCharacterGuardEvent?.Invoke(val);
-    }
-    #endregion
-
-    #region Camera
-    public static void TriggerFocusCamIn(){
-        OnBattleFocusInEvent?.Invoke();
-    }
-    public static void TriggerFocusCamOut(){
-        OnBattleFocusOutEvent?.Invoke();
-    }
     #endregion
 
     #region MISC
     public static void TriggerForwardStep(){
         OnForwardStepEvent?.Invoke();
-    }
-    public static void CharacterBoostIn(){
-        OnCharacterBoostInEvent?.Invoke();
-    }
-    public static void CharacterBoostOut(){
-        OnCharacterBoostOutEvent?.Invoke();
     }
     #endregion
 }

@@ -5,11 +5,8 @@ using UnityEngine;
 public class PlayerAnimationScript : AnimatorUtil
 {
     [SerializeField] private float _movementLerper = .5f;
-    // [SerializeField] AnimationCurve _rumbleFq;
 
     private Animator _anim;
-    private float _moveVal;
-    private int _activeWeaponIndex;
 
     private void Start() {
         _anim = GetComponent<Animator>();
@@ -17,16 +14,13 @@ public class PlayerAnimationScript : AnimatorUtil
         PlayerEventSystem.OnSpawnInEvent += Spawn;
 
         PlayerEventSystem.OnCharacterIdleEvent += Idle;
+        PlayerEventSystem.OnCharacterWalkEvent += Walk;
         PlayerEventSystem.OnCharacterRunEvent += Run;
 
-        PlayerEventSystem.OnUltimateTriggeredIn += EnterUltimateState;
-        PlayerEventSystem.OnUltimateAttackEvent += UltimateAttack;
-        PlayerEventSystem.OnUltimateTriggeredOut += LeaveUltimateState;
+        PlayerEventSystem.OnCharacterTurnEvent += Turn;
 
-        PlayerEventSystem.OnCharacterJumpEvent += Jump;
-        PlayerEventSystem.OnCharacterGuardEvent += Guard;
-
-        PlayerEventSystem.OnCharacterAttackTriggerEvent += TriggerAttack;
+        PlayerEventSystem.OnCharacterBasicAttackTriggerEvent += TriggerBasicAttack;
+        PlayerEventSystem.OnCharacterStrongAttackTriggerEvent += TriggerStrongAttack;
 
         PlayerEventSystem.OnDeathEvent += Death;
     }
@@ -35,16 +29,13 @@ public class PlayerAnimationScript : AnimatorUtil
         PlayerEventSystem.OnSpawnInEvent -= Spawn;
 
         PlayerEventSystem.OnCharacterIdleEvent -= Idle;
+        PlayerEventSystem.OnCharacterWalkEvent -= Walk;
         PlayerEventSystem.OnCharacterRunEvent -= Run;
 
-        PlayerEventSystem.OnUltimateTriggeredIn -= EnterUltimateState;
-        PlayerEventSystem.OnUltimateAttackEvent -= UltimateAttack;
-        PlayerEventSystem.OnUltimateTriggeredOut -= LeaveUltimateState;
+        PlayerEventSystem.OnCharacterTurnEvent += Turn;
 
-        PlayerEventSystem.OnCharacterJumpEvent -= Jump;
-        PlayerEventSystem.OnCharacterGuardEvent -= Guard;
-
-        PlayerEventSystem.OnCharacterAttackTriggerEvent -= TriggerAttack;
+        PlayerEventSystem.OnCharacterBasicAttackTriggerEvent -= TriggerBasicAttack;
+        PlayerEventSystem.OnCharacterStrongAttackTriggerEvent -= TriggerStrongAttack;
 
         PlayerEventSystem.OnDeathEvent -= Death;
     }
@@ -56,28 +47,20 @@ public class PlayerAnimationScript : AnimatorUtil
     public void Idle(){
         BlendTreeValue(_anim, "Movement", 0f, _movementLerper);
     }
-    public void Run(){
+    public void Walk(){
         BlendTreeValue(_anim, "Movement", 1f, _movementLerper);
     }
-    public void Jump(){
-        AnimatorTrigger(_anim, "Jump", 0.5f);
+    public void Run(){
+        BlendTreeValue(_anim, "Movement", 2f, _movementLerper);
     }
-    public void TriggerAttack(){
-        AnimatorTrigger(_anim, "Attack", 0.5f);
+    public void Turn(float val){
+        BlendTreeValue(_anim, "Turn", val, _movementLerper);
     }
-    public void Guard(bool val){
-        _anim.SetBool("Guarding", val);
+    public void TriggerBasicAttack(){
+        AnimatorTrigger(_anim, "AttackBasicTrigger", 0.5f);
     }
-    public void EnterUltimateState(){
-        AnimatorTrigger(_anim, "EnterUltimateTrigger", 0.5f);
-        _anim.SetBool("EnterUltimate", true);
-    }
-    public void LeaveUltimateState(){
-        _anim.SetBool("EnterUltimate", false);
-    }
-    public void UltimateAttack(){
-        AnimatorTrigger(_anim, "UltimateAttack", 0.5f);
-        PlayerEventSystem.TriggerUltimateOut();
+    public void TriggerStrongAttack(){
+        AnimatorTrigger(_anim, "AttackStrongTrigger", 0.5f);
     }
     public void UpdateCharacterDirection(Vector2 direction){
         BlendTreeValue(_anim, "FrontBack", direction.y, _movementLerper);

@@ -17,7 +17,6 @@ public class VolumeManager : MonoBehaviour
     private bool _attackHitTrigger = false;
 
     private void Start() {
-        PlayerEventSystem.OnCharacterBoostInEvent += BoostVolumeOn;
         PlayerEventSystem.OnSuccessfulHitEvent += AttackVolumeOn;
     }
 

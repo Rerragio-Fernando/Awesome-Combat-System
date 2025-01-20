@@ -12,7 +12,7 @@ public class AnimatorUtil : MonoBehaviour {
         float val = Mathf.Lerp(anim.GetFloat(name), to, rate * Time.deltaTime);
 
         if(to == 0f){
-            if(val < 0.1f)
+            if(val < 0.1f && val > -0.1f)
                 val = 0f;
         }
 

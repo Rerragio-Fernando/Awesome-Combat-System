@@ -24,12 +24,12 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "Sprint",
                     "type": "Button",
-                    "id": "6bf74daf-8a98-48de-b071-9a4f6efdc3f3",
+                    "id": "c3850c04-eb2c-4093-b987-a471d2ac7af8",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -42,21 +42,12 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ManaCharge",
+                    "name": "StrongAttack",
                     "type": "Button",
                     "id": "0e644b44-6b17-4ac3-ba8a-1e3e67c6e951",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Ultimate",
-                    "type": "Button",
-                    "id": "923fca4e-af35-4005-835a-4e021370463f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -98,28 +89,6 @@
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
                     "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "150d2785-d381-47b7-aa2c-661f91c5e2f7",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "443c8d79-1fe4-4161-a740-72742de23938",
-                    "path": "<DualShockGamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -218,7 +187,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ManaCharge",
+                    "action": "StrongAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -229,29 +198,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ManaCharge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b859207a-99be-49bd-b391-b98f0788f897",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ultimate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d29b2610-6469-4397-ac6d-be260127024f",
-                    "path": "<Mouse>/backButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ultimate",
+                    "action": "StrongAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -285,6 +232,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Guard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "264ab74a-1bcc-4896-98e7-5ae784876ffd",
+                    "path": "<DualShockGamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

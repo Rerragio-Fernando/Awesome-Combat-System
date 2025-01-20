@@ -10,12 +10,6 @@ public class PlayerCameraHandler : MonoBehaviour
 
     private void Start() {
         ActivateMainBattleCam();
-
-        PlayerEventSystem.OnUltimateTriggeredIn += ActivateUltiCam;
-        PlayerEventSystem.OnUltimateTriggeredOut += ActivateMainBattleCam;
-
-        PlayerEventSystem.OnBattleFocusInEvent += ActivateFocusCam;
-        PlayerEventSystem.OnBattleFocusOutEvent += DeactivateFocusCam;
     }
 
     void ActivateUltiCam(){
