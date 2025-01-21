@@ -54,7 +54,7 @@ public class PlayerCombatSystem : MonoBehaviour
     
     private void Update(){
         Debug.Log($"Attacking :" + _isAttacking);
-        if(_playerCombatState == CombatState.NotAttacking){
+        if(_playerCombatState == CombatState.NotAttacking || _playerCombatState == CombatState.Attacking){
             if(_basicAtkIN){
                 PlayerEventSystem.TriggerBasicAttack();                                                      //EVENT TRIGGERED
             }
@@ -113,10 +113,6 @@ public class PlayerCombatSystem : MonoBehaviour
             _playerCombatState = CombatState.NotAttacking;
             PlayerEventSystem.CombatState(_playerCombatState);
             _nextMove = Time.time + _movementTimeDelay;
-        }
-
-        public void EndOfAnimation(){
-            
         }
     #endregion
 }

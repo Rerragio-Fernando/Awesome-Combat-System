@@ -5,54 +5,39 @@ using UnityEngine.Rendering;
 
 public class VolumeManager : MonoBehaviour
 {
-    [Header("Boost Volume")]
-    [SerializeField] private Volume _boostVolume;
-    [SerializeField] private float _boostVolumeSmoothTime;
+    [Header("Anticipation Volume")]
+    [SerializeField] private Volume _anticipationVolume;
+    [SerializeField] private float _anticipationVolumeSmoothTime;
 
-    [Header("Attack Hit Volume")]
-    [SerializeField] private Volume _attackVolume;
-    [SerializeField] private float _attackVolumeSmoothTime;
-
-    private bool _boostTrigger = false;
-    private bool _attackHitTrigger = false;
+    private bool _anticipationTrigger = false;
 
     private void Start() {
-        PlayerEventSystem.OnSuccessfulHitEvent += AttackVolumeOn;
+        PlayerEventSystem.CombatStateEvent += CombatStateReceiver;
     }
 
     private void Update() {
-        if(_boostTrigger)
-            _boostVolume.weight = Mathf.Lerp(_boostVolume.weight, 1f, _boostVolumeSmoothTime * Time.deltaTime);
+        if(_anticipationTrigger)
+            _anticipationVolume.weight = Mathf.Lerp(_anticipationVolume.weight, 1f, _anticipationVolumeSmoothTime * Time.deltaTime);
         else
-            _boostVolume.weight = Mathf.Lerp(_boostVolume.weight, 0f, _boostVolumeSmoothTime * Time.deltaTime);
-
-        if(_attackHitTrigger)
-            _attackVolume.weight = Mathf.Lerp(_attackVolume.weight, 1f, _attackVolumeSmoothTime * Time.deltaTime);
-        else
-            _attackVolume.weight = Mathf.Lerp(_attackVolume.weight, 0f, _attackVolumeSmoothTime * Time.deltaTime);
+            _anticipationVolume.weight = Mathf.Lerp(_anticipationVolume.weight, 0f, _anticipationVolumeSmoothTime * Time.deltaTime);
     }
 
-    private void AttackVolumeOn(){
-        StartCoroutine(AttackVolume());
+    void CombatStateReceiver(CombatState cs){
+        if(cs == CombatState.Anticipation)
+            _anticipationTrigger = true;
+        else
+            _anticipationTrigger = false;
+    }
+
+    private void AnticipationVolumeOn(){
+        StartCoroutine(AnticipationVolume());
     }
     
-    IEnumerator AttackVolume(){
-        _attackHitTrigger = true;
+    IEnumerator AnticipationVolume(){
+        _anticipationTrigger = true;
 
         yield return new WaitForSeconds(.25f);
 
-        _attackHitTrigger = false;
-    }
-
-    private void BoostVolumeOn(){
-        StartCoroutine(BoostVolume());
-    }
-    
-    IEnumerator BoostVolume(){
-        _boostTrigger = true;
-
-        yield return new WaitForSeconds(.25f);
-
-        _boostTrigger = false;
+        _anticipationTrigger = false;
     }
 }

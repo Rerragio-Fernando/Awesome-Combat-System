@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Handle movement and animation states
-            if(_movDir.magnitude > 0.1f && _isGrounded && !_combatSys.IsAttacking){
+            if(_movDir.magnitude > 0.25f && _isGrounded && !_combatSys.IsAttacking){
                 if(_sprintIN && (_movDir.z > 0f && (_movDir.x < 0.25f && _movDir.x > -0.25f))){
                     _moveSpeed = _runSpeed;
                     PlayerEventSystem.CharacterRun();
@@ -111,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
                 _velocity = new Vector3(adjustedVelocity.x, _velocity.y, adjustedVelocity.z);
             }
             else{
+                PlayerEventSystem.CharacterIdle();
                 _sprintIN = false;
                 ApplyFriction();
             }
