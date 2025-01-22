@@ -9,26 +9,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform _cam;
 
     [Header("Player Properties")]
-    [SerializeField] private float _gravity;
+    [SerializeField] private float _gravity;//
     [SerializeField] private float _playerMass;
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _runSpeed;
     [SerializeField] private float _forwardStepSpeed;
-    [SerializeField] private float _playerFriction;
-    [SerializeField] private float _jumpForce;
-    [SerializeField] private float _distanceToGround;
-    [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private float _playerFriction;//
+    [SerializeField] private float _distanceToGround;//
+    [SerializeField] private LayerMask _groundLayer;//
     [SerializeField] private Transform _groundTrans;
-    [SerializeField] private float _turnSmoothTime = 0.5f;
 
-    private float _turnSmoothVelocity = 0f;
     private float _targAngle;
     private float _moveSpeed = 0f;
     private float _nextDodge = 0f;
     private Vector3 _movDir;
-    private Vector3 _dodgeDir;
     private bool _isGrounded;
-    private bool _jump = false;
     private bool _isGuarding = false;
     private bool _isAttacking = false;
     private Vector3 _velocity;
