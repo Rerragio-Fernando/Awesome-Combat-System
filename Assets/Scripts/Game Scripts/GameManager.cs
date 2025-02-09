@@ -10,7 +10,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private GameObject _player;
 
-    private void Start() {
+    private void Start() 
+    {
         _player = Instantiate(_playerPrefab, _spawnPoint.position, _spawnPoint.rotation);    
     }    
 }

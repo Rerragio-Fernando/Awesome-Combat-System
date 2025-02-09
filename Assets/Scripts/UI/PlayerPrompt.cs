@@ -6,12 +6,14 @@ public class PlayerPrompt : MonoBehaviour
 {
     [SerializeField] private GameObject _playerPrompt;
 
-    private void Start() {
+    private void Start() 
+    {
         _playerPrompt.SetActive(false);
         PlayerEventSystem.CombatStateEvent += CombatStateReceiver;
     }
 
-    void CombatStateReceiver(CombatState cs){
+    void CombatStateReceiver(CombatState cs)
+    {
         if(cs == CombatState.Attacking)
             _playerPrompt.SetActive(true);
         else

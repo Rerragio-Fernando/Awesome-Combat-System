@@ -31,7 +31,8 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController _cont;
     private PlayerCombatSystem _combatSys;
 
-    private void Start() {
+    private void Start() 
+    {
         Cursor.lockState = CursorLockMode.Locked;
         _cont = GetComponent<CharacterController>();
         _playerAnim = GetComponent<PlayerAnimationScript>();
@@ -49,55 +50,67 @@ public class PlayerMovement : MonoBehaviour
         private bool _aimIN;
         private bool _sprintIN;
 
-        void MoveInput(Vector2 move, InputActionPhase phase){
+        void MoveInput(Vector2 move, InputActionPhase phase)
+        {
             if(phase == InputActionPhase.Performed)
                 _movementIN = move;
             else
                 _movementIN = Vector2.zero;
         }
-        void SprintInput(InputActionPhase phase){
+        void SprintInput(InputActionPhase phase)
+        {
             if(phase == InputActionPhase.Started)
                 _sprintIN = !_sprintIN;
         }
     #endregion
 
-    void Guarding(bool val){
+    void Guarding(bool val)
+    {
         _isGuarding = val;
     }
 
-    private void Update() {
+    private void Update() 
+    {
         Grounded();
         PlayerMovementFunction();
 
         _cont.Move(_velocity * Time.deltaTime);
     }
 
-    void Grounded(){
+    void Grounded()
+    {
         _isGrounded = Physics.CheckSphere(_groundTrans.position, _distanceToGround, _groundLayer);
         _playerAnim.SetGrounded(_isGrounded);
     }
     
-    void PlayerMovementFunction(){
-        if(!_isGuarding){
+    void PlayerMovementFunction()
+    {
+        if(!_isGuarding)
+        {
             // Calculate movement direction and target angle
             _movDir = new Vector3(_movementIN.x, 0f, _movementIN.y).normalized;
             _targAngle = Mathf.Atan2(_movDir.x, _movDir.z) * Mathf.Rad2Deg + _cam.eulerAngles.y;
 
             // Handle vertical velocity
-            if(!_isGrounded){
+            if(!_isGrounded)
+            {
                 _velocity.y += -_gravity * _playerMass * Time.deltaTime;
             }
-            else{
+            else
+            {
                 _velocity.y = -1f;
             }
 
             // Handle movement and animation states
-            if(_movDir.magnitude > 0.25f && _isGrounded && !_combatSys.IsAttacking){
-                if(_sprintIN && (_movDir.z > 0f && (_movDir.x < 0.25f && _movDir.x > -0.25f))){
+            if(_movDir.magnitude > 0.25f && _isGrounded && !_combatSys.IsAttacking)
+            {
+                if(_sprintIN && (_movDir.z > 0f && (_movDir.x < 0.25f && _movDir.x > -0.25f)))
+                {
                     _moveSpeed = _runSpeed;
                     PlayerEventSystem.CharacterRun();
                 }
-                else{
+                else
+                {
                     _moveSpeed = _walkSpeed;
                     PlayerEventSystem.CharacterWalk();
                 }
@@ -105,7 +118,8 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 adjustedVelocity = movDir.normalized * _moveSpeed;
                 _velocity = new Vector3(adjustedVelocity.x, _velocity.y, adjustedVelocity.z);
             }
-            else{
+            else
+            {
                 PlayerEventSystem.CharacterIdle();
                 _sprintIN = false;
                 ApplyFriction();
@@ -113,22 +127,26 @@ public class PlayerMovement : MonoBehaviour
 
             _playerAnim.UpdateCharacterDirection(_movementIN);
         }
-        else{
+        else
+        {
             HandleGuarding();
         }
     }
 
-    void ApplyFriction(){
+    void ApplyFriction()
+    {
         PlayerEventSystem.CharacterIdle();
         float friction = _isGrounded ? _playerFriction : 0.05f;
         _velocity = Vector3.Lerp(_velocity, new Vector3(0f, _velocity.y, 0f), friction * Time.deltaTime);
     }
 
-    void HandleGuarding(){
+    void HandleGuarding()
+    {
         
     }
 
-    public void ForwardStep(){
+    public void ForwardStep()
+    {
         _velocity += transform.forward * _forwardStepSpeed;
     }
 }

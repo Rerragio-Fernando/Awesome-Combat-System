@@ -1183,7 +1183,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -840037777384891287, guid: 6167ff142ebd14841b49661f17845a0a, type: 3}
+  - {fileID: 2100000, guid: 9a466bda5c99c0d498cc76788514b964, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2253,7 +2253,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4565884009001823619, guid: 6167ff142ebd14841b49661f17845a0a, type: 3}
+  - {fileID: 2100000, guid: 6577cf7f559450e48a2b5a6ce8a81490, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2709,13 +2709,11 @@ MonoBehaviour:
   _runSpeed: 5
   _forwardStepSpeed: 5
   _playerFriction: 5
-  _jumpForce: 10
   _distanceToGround: 0.4
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
   _groundTrans: {fileID: 1774116576499877692}
-  _turnSmoothTime: 0.5
 --- !u!114 &6448153370354084678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2729,9 +2727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraTarget: {fileID: 1849522058008274733}
-  _minRotation: -60
-  _maxRotation: 60
-  _aimSensitivity: 2
+  _lookData: {fileID: 11400000, guid: cc39acbaa7ffbf04a8819eff7ed986e2, type: 2}
 --- !u!114 &5995099860024719862
 MonoBehaviour:
   m_ObjectHideFlags: 0

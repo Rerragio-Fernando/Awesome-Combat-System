@@ -11,29 +11,34 @@ public class VolumeManager : MonoBehaviour
 
     private bool _anticipationTrigger = false;
 
-    private void Start() {
+    private void Start() 
+    {
         PlayerEventSystem.CombatStateEvent += CombatStateReceiver;
     }
 
-    private void Update() {
+    private void Update() 
+    {
         if(_anticipationTrigger)
             _anticipationVolume.weight = Mathf.Lerp(_anticipationVolume.weight, 1f, _anticipationVolumeSmoothTime * Time.deltaTime);
         else
             _anticipationVolume.weight = Mathf.Lerp(_anticipationVolume.weight, 0f, _anticipationVolumeSmoothTime * Time.deltaTime);
     }
 
-    void CombatStateReceiver(CombatState cs){
+    void CombatStateReceiver(CombatState cs)
+    {
         if(cs == CombatState.Anticipation)
             _anticipationTrigger = true;
         else
             _anticipationTrigger = false;
     }
 
-    private void AnticipationVolumeOn(){
+    private void AnticipationVolumeOn()
+    {
         StartCoroutine(AnticipationVolume());
     }
     
-    IEnumerator AnticipationVolume(){
+    IEnumerator AnticipationVolume()
+    {
         _anticipationTrigger = true;
 
         yield return new WaitForSeconds(.25f);

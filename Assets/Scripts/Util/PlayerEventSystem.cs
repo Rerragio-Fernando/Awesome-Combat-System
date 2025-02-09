@@ -24,40 +24,50 @@ public class PlayerEventSystem : GameCharacterEventSystem
     //Event Method
 
     #region Locomotion
-    public static void CharacterIdle(){
+    public static void CharacterIdle()
+    {
         OnCharacterIdleEvent?.Invoke();
     }
-    public static void CharacterWalk(){
+    public static void CharacterWalk()
+    {
         OnCharacterWalkEvent?.Invoke();
     }
-    public static void CharacterRun(){
+    public static void CharacterRun()
+    {
         OnCharacterRunEvent?.Invoke();
     }
-    public static void CharacterTurn(float val){
+    public static void CharacterTurn(float val)
+    {
         OnCharacterTurnEvent?.Invoke(val);
     }
     #endregion
 
     #region Attacks
-    public static void TriggerBasicAttack(){
+    public static void TriggerBasicAttack()
+    {
         OnCharacterBasicAttackTriggerEvent?.Invoke();
     }
-    public static void TriggerStrongAttack(){
+    public static void TriggerStrongAttack()
+    {
         OnCharacterStrongAttackTriggerEvent?.Invoke();
     }
-    public static void CombatState(CombatState cs){
+    public static void CombatState(CombatState cs)
+    {
         CombatStateEvent?.Invoke(cs);
     }
-    public static void TriggerSuccessfulHit(){
+    public static void TriggerSuccessfulHit()
+    {
         OnSuccessfulHitEvent?.Invoke();
     }
-    public static void TriggerResetCombo(){
+    public static void TriggerResetCombo()
+    {
         OnResetComboEvent?.Invoke();
     }
     #endregion
 
     #region MISC
-    public static void TriggerForwardStep(){
+    public static void TriggerForwardStep()
+    {
         OnForwardStepEvent?.Invoke();
     }
     #endregion

@@ -8,7 +8,8 @@ public class PlayerAnimationScript : AnimatorUtil
 
     private Animator _anim;
 
-    private void Start() {
+    private void Start() 
+    {
         _anim = GetComponent<Animator>();
 
         PlayerEventSystem.OnSpawnInEvent += Spawn;
@@ -25,7 +26,8 @@ public class PlayerAnimationScript : AnimatorUtil
         PlayerEventSystem.OnDeathEvent += Death;
     }
 
-    private void OnDisable() {
+    private void OnDisable() 
+    {
         PlayerEventSystem.OnSpawnInEvent -= Spawn;
 
         PlayerEventSystem.OnCharacterIdleEvent -= Idle;
@@ -40,38 +42,48 @@ public class PlayerAnimationScript : AnimatorUtil
         PlayerEventSystem.OnDeathEvent -= Death;
     }
 
-    public void Spawn(){
+    public void Spawn()
+    {
         Debug.Log($"Spawned In");
     }
 
-    public void Idle(){
+    public void Idle()
+    {
         BlendTreeValue(_anim, "Movement", 0f, _movementLerper);
     }
-    public void Walk(){
+    public void Walk()
+    {
         BlendTreeValue(_anim, "Movement", 1f, _movementLerper);
     }
-    public void Run(){
+    public void Run()
+    {
         BlendTreeValue(_anim, "Movement", 2f, _movementLerper);
     }
-    public void Turn(float val){
+    public void Turn(float val)
+    {
         BlendTreeValue(_anim, "Turn", val, _movementLerper);
     }
-    public void TriggerBasicAttack(){
+    public void TriggerBasicAttack()
+    {
         AnimatorTrigger(_anim, "AttackBasicTrigger", 0.5f);
     }
-    public void TriggerStrongAttack(){
+    public void TriggerStrongAttack()
+    {
         AnimatorTrigger(_anim, "AttackStrongTrigger", 0.5f);
     }
-    public void UpdateCharacterDirection(Vector2 direction){
+    public void UpdateCharacterDirection(Vector2 direction)
+    {
         BlendTreeValue(_anim, "FrontBack", direction.y, _movementLerper);
         BlendTreeValue(_anim, "LeftRight", direction.x, _movementLerper);
     }
 
-    public void Death(){
+    public void Death()
+    {
         AnimatorTrigger(_anim, "Death", 0.5f);
     }
 
-    public void SetGrounded(bool val){
+    public void SetGrounded(bool val)
+    {
         _anim.SetBool("Grounded", val);
     }
 }

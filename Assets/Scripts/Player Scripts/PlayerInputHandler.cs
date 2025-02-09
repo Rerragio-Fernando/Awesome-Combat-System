@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public struct AttackType{
+public struct AttackType
+{
     public bool attack;
     public int attackType;//1-basic, 2-strong, 3-AOE
 }
 
-public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler> {
+public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler> 
+{
     private IA_Player _playerInputActions;
     private bool _playerAlive;
 
@@ -23,13 +25,15 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler> {
     public static event Action<InputActionPhase> BasicAttackEvent;
     public static event Action<InputActionPhase> StrongAttackEvent;
 
-    protected override void Awake(){
+    protected override void Awake()
+    {
         base.Awake();
         _playerInputActions = new IA_Player();
         _playerAlive = true;
     }
 
-    private void OnEnable() {
+    private void OnEnable() 
+    {
         PlayerEventSystem.OnDeathEvent += UnalivePlayer;
 
         _playerInputActions.Enable();
@@ -46,7 +50,8 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler> {
         OnEnable(_playerInputActions.Player.StrongAttack, inputContext => IfPlayerAlive(() => StrongAttackEvent?.Invoke(inputContext.phase)));
     }
 
-    private void OnDisable() {
+    private void OnDisable() 
+    {
         PlayerEventSystem.OnDeathEvent -= UnalivePlayer;
 
         _playerInputActions.Disable();
@@ -63,15 +68,18 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler> {
     }
 
     private void IfPlayerAlive(Action action)
+    
     {
         if (_playerAlive) action?.Invoke();
     }
 
-    void UnalivePlayer(){
+    void UnalivePlayer()
+    {
         _playerAlive = false;
     }
 
     private void OnEnable(InputAction inputAction, Action<InputAction.CallbackContext> callback)
+    
     {
         inputAction.started += callback;
         inputAction.performed += callback;
@@ -79,6 +87,7 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler> {
     }
 
     private void OnDisable(InputAction inputAction, Action<InputAction.CallbackContext> callback)
+    
     {
         inputAction.started -= callback;
         inputAction.performed -= callback;

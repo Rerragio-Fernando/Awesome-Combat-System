@@ -10,12 +10,14 @@ public class TimeScaleManager : MonoBehaviour
     private float _timeScale = 1f;
     private float _fixedDeltaTime;
 
-    private void Start() {
+    private void Start() 
+    {
         _fixedDeltaTime = Time.fixedDeltaTime;
         PlayerEventSystem.CombatStateEvent += CombatStateReceiver;
     }
 
-    void CombatStateReceiver(CombatState cs){
+    void CombatStateReceiver(CombatState cs)
+    {
         if(cs == CombatState.Anticipation)
             Time.timeScale = _anticipationTimeScale;
         else
