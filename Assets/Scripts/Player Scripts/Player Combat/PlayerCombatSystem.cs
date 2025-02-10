@@ -90,16 +90,12 @@ public class PlayerCombatSystem : MonoBehaviour
     {
         if (Physics.Raycast(_raycastTrans.position, transform.forward, out _hit, _playerNormalAtkRange, layerMask))
         {
-            // var l_hitFx = Instantiate(_hitFX, _hit.point, Quaternion.LookRotation(_hit.normal));//Spawn Hit Effect
-            // Destroy(l_hitFx, 1f);
-
             GameObject l_hitObj = _hit.transform.gameObject;
 
-            EnemyDamageScript l_ds = l_hitObj.GetComponentInChildren<EnemyDamageScript>();
+            CharacterHealth l_ds = l_hitObj.GetComponentInChildren<CharacterHealth>();
             if(l_ds != null)
             {
                 PlayerEventSystem.TriggerSuccessfulHit();                                                       //EVENT TRIGGERED
-                // _manaHandler.GainMana(l_ds.TakeDamage(damage, _comboScript.Combo));
             }
 
             Rigidbody l_rb = l_hitObj.GetComponent<Rigidbody>();
