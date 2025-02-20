@@ -44,7 +44,6 @@ public class Look : MonoBehaviour
 
     void HorizontalLook()
     {
-        PlayerEventSystem.CharacterTurn(lookIN.x);
         horizontalRot += lookIN.x * lookData.aimSensitivity;
 
         if(!notAttacking) return;

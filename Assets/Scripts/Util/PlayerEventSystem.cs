@@ -9,7 +9,6 @@ public class PlayerEventSystem : GameCharacterEventSystem
     public static event Action OnCharacterIdleEvent;
     public static event Action OnCharacterWalkEvent;
     public static event Action OnCharacterRunEvent;
-    public static event Action<float> OnCharacterTurnEvent;
 
     public static event Action OnCharacterBasicAttackTriggerEvent;
     public static event Action OnCharacterStrongAttackTriggerEvent;
@@ -35,10 +34,6 @@ public class PlayerEventSystem : GameCharacterEventSystem
     public static void CharacterRun()
     {
         OnCharacterRunEvent?.Invoke();
-    }
-    public static void CharacterTurn(float val)
-    {
-        OnCharacterTurnEvent?.Invoke(val);
     }
     #endregion
 

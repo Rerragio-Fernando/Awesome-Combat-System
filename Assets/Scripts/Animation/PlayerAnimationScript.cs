@@ -18,8 +18,6 @@ public class PlayerAnimationScript : AnimatorUtil
         PlayerEventSystem.OnCharacterWalkEvent += Walk;
         PlayerEventSystem.OnCharacterRunEvent += Run;
 
-        PlayerEventSystem.OnCharacterTurnEvent += Turn;
-
         PlayerEventSystem.OnCharacterBasicAttackTriggerEvent += TriggerBasicAttack;
         PlayerEventSystem.OnCharacterStrongAttackTriggerEvent += TriggerStrongAttack;
 
@@ -33,8 +31,6 @@ public class PlayerAnimationScript : AnimatorUtil
         PlayerEventSystem.OnCharacterIdleEvent -= Idle;
         PlayerEventSystem.OnCharacterWalkEvent -= Walk;
         PlayerEventSystem.OnCharacterRunEvent -= Run;
-
-        PlayerEventSystem.OnCharacterTurnEvent += Turn;
 
         PlayerEventSystem.OnCharacterBasicAttackTriggerEvent -= TriggerBasicAttack;
         PlayerEventSystem.OnCharacterStrongAttackTriggerEvent -= TriggerStrongAttack;
@@ -58,10 +54,6 @@ public class PlayerAnimationScript : AnimatorUtil
     public void Run()
     {
         BlendTreeValue(_anim, "Movement", 2f, _movementLerper);
-    }
-    public void Turn(float val)
-    {
-        BlendTreeValue(_anim, "Turn", val, _movementLerper);
     }
     public void TriggerBasicAttack()
     {
