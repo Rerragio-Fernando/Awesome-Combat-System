@@ -3,26 +3,26 @@ using UnityEngine.UI;
 
 public class CharacterHealth : MonoBehaviour
 {
-    [SerializeField] Slider _healthBar;
-    [SerializeField] private int _maxHealth;
-    private int _health;
+    [SerializeField] Slider healthBar;
+    [SerializeField] private int maxHealth;
+    private int health;
 
     private void Start() {
-        _health = _maxHealth;
-        if (_healthBar)
+        health = maxHealth;
+        if (healthBar)
         {
-            _healthBar.maxValue = _maxHealth;
+            healthBar.maxValue = maxHealth;
         }
     }
 
     public void TakeDamage(int val){
-        _health -= val;
+        health -= val;
     }
 
     private void Update() {
-        if(_healthBar)
+        if(healthBar)
         {
-            _healthBar.value = _health;
+            healthBar.value = health;
         }   
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c715ea256d6cff408bf8242a0c6a0ac, type: 3}
   m_Name: PlayerLookData
   m_EditorClassIdentifier: 
-  _minRotation: -40
-  _maxRotation: 40
-  _aimSensitivity: 0.25
+  minRotation: -40
+  maxRotation: 40
+  aimSensitivity: 1.5

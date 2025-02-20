@@ -4,11 +4,11 @@ using UnityEngine;
 public class PlayerLookData : ScriptableObject
 {
     [Tooltip("Lower-bound of vertical look")]
-    public float _minRotation;
+    public float minRotation;
 
     [Tooltip("Upper-bound of vertical look")]
-    public float _maxRotation;
+    public float maxRotation;
 
     [Tooltip("Player Look Sensitivity")]
-    public float _aimSensitivity;
+    public float aimSensitivity;
 }

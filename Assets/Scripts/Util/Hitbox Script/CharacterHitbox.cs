@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CharacterHitbox : MonoBehaviour
 {
-    [SerializeField] HitBox[] _hitboxList;
+    [SerializeField] HitBox[] hitboxList;
 }
 
 public struct HitBox
