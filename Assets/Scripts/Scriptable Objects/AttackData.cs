@@ -7,4 +7,7 @@ public class AttackData : ScriptableObject
 {
     [Tooltip("Name given in the Animator")]
     public string animationStateName;
+
+    [Tooltip("Time window in which when attacked it will continue the combo")]
+    public float nextMeleeAttackTimeWindow;
 }

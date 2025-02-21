@@ -11,4 +11,9 @@ public static class AnimationServices
         val = Mathf.Lerp(val, value, smoothTime * Time.deltaTime);
         animator.SetFloat(parameterName, val);
     }
+
+    public static void PlayAnimation(Animator anim, string animation, float crossFade = 0.2f)
+    {
+        anim.CrossFade(animation, crossFade);
+    }
 }
