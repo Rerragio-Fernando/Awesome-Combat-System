@@ -30,15 +30,52 @@ public class ActionController : MonoBehaviour
 
     private void OnEnable() {
         PlayerInputHandler.BasicAttackEvent += (phase) => SetNextState(phase, PlayerCombatState.PLAYER_BASIC_ATTACK);
+        PlayerInputHandler.StrongAttackEvent += (phase) => SetNextState(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
     }
 
     private void OnDisable() {
         PlayerInputHandler.BasicAttackEvent -= (phase) => SetNextState(phase, PlayerCombatState.PLAYER_BASIC_ATTACK);
+        PlayerInputHandler.StrongAttackEvent -= (phase) => SetNextState(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
+    }
+
+    private void Update() {
+        Debug.Log($"Player Combat State: " + playerCurrentState);
     }
 
     private void SetNextState(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
     {
         if(phase == InputActionPhase.Performed)
             playerNextState = nextCombatState;
+    }
+
+    private void ExecuteAction(){
+        switch (playerCurrentState)
+        {
+            case PlayerCombatState.PLAYER_BASIC_ATTACK:
+                BasicAttack?.Invoke();
+                break;
+
+            case PlayerCombatState.PLAYER_STRONG_ATTACK:
+                StrongAttack?.Invoke();
+                break;
+            
+            case PlayerCombatState.PLAYER_GUARD:
+                Guard?.Invoke();
+                break;
+            
+            case PlayerCombatState.PLAYER_DODGE:
+                Dodge?.Invoke();
+                break;
+            
+            default:
+                Idle?.Invoke();
+                break;
+        }
+    }
+
+    //Called by Animation Events
+    public void MoveToNextAction(){
+        playerCurrentState = playerNextState;
+        playerNextState = PlayerCombatState.PLAYER_IDLE;
     }
 }

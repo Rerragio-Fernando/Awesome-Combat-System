@@ -6,7 +6,6 @@ public class Look : MonoBehaviour
 {
     [SerializeField] private Transform cameraTarget;
     [SerializeField] private PlayerLookData lookData;
-
     [SerializeField] private float turnSmoothTime;
 
     private float horizontalRot;

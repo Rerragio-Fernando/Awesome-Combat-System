@@ -17,14 +17,14 @@ public class PlayerMovement : MovementAnimator
         void MoveInput(Vector2 move, InputActionPhase phase)
         {
             if(phase == InputActionPhase.Performed)
-                _movementIN = move;
+                movementIN = move;
             else
-                _movementIN = Vector2.zero;
+                movementIN = Vector2.zero;
         }
         void SprintInput(InputActionPhase phase)
         {
             if(phase == InputActionPhase.Started)
-                _sprintIN = !_sprintIN;
+                sprintIN = !sprintIN;
         }
     #endregion
 }

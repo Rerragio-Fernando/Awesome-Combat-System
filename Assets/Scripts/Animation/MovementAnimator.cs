@@ -26,11 +26,11 @@ public class MovementAnimator : Movement
     /// </summary>
     private void UpdateAnimatorValues(){
         //Movement Amount
-        float movementVal = (_movementIN.magnitude >= 0.1f && _sprintIN) ? 2f : (_movementIN.magnitude >= 0.1f) ? 1f : 0f;
+        float movementVal = (movementIN.magnitude >= 0.1f && sprintIN) ? 2f : (movementIN.magnitude >= 0.1f) ? 1f : 0f;
         AnimationServices.SetBlendTreeParameter(anim, movementParameterName, movementVal, smoothTimeLerp);
 
         //Directional Amount
-        AnimationServices.SetBlendTreeParameter(anim, directionXParameterName, _movementIN.x, smoothTimeLerp);
-        AnimationServices.SetBlendTreeParameter(anim, directionYParameterName, _movementIN.y, smoothTimeLerp);
+        AnimationServices.SetBlendTreeParameter(anim, directionXParameterName, movementIN.x, smoothTimeLerp);
+        AnimationServices.SetBlendTreeParameter(anim, directionYParameterName, movementIN.y, smoothTimeLerp);
     }
 }
