@@ -8,30 +8,30 @@ using UnityEngine.UI;
 
 public class PlayerCombatSystem : MonoBehaviour
 {
-    [SerializeField] private float _movementTimeDelay;
+    [SerializeField] private float movementTimeDelay;
 
     [Header("Attack Properties")]
-    [SerializeField] private Transform _raycastTrans;
+    [SerializeField] private Transform raycastTrans;
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private float _playerNormalAtkRange;
+    [SerializeField] private float playerNormalAtkRange;
 
-    private bool _isAttacking = false;
-    private PlayerComboScript _comboScript;
-    private RaycastHit _hit;
+    private bool isAttacking = false;
+    private PlayerComboScript comboScript;
+    private RaycastHit hit;
 
     //Timer Variables
-    private float _nextMove = 0f;
+    private float nextMove = 0f;
 
     public bool IsAttacking 
     {
-        get{return _isAttacking;}
+        get{return isAttacking;}
     }
 
-    private CombatState _playerCombatState;
+    private CombatState playerCombatState;
 
     private void Start() 
     {
-        _comboScript = GetComponent<PlayerComboScript>();
+        comboScript = GetComponent<PlayerComboScript>();
         NotAttacking();
 
         PlayerInputHandler.BasicAttackEvent += BasicAttackInput;
@@ -39,33 +39,34 @@ public class PlayerCombatSystem : MonoBehaviour
     }
 
     #region Input Functions
-        bool _basicAtkIN, _strongAtkIN;
+        bool basicAtkIN, strongAtkIN;
+        bool guardIN;
         void BasicAttackInput(InputActionPhase phase)
         {
             if(phase == InputActionPhase.Started)
-                _basicAtkIN = true;
+                basicAtkIN = true;
             else
-                _basicAtkIN = false;
+                basicAtkIN = false;
         }
         void StrongAttackInput(InputActionPhase phase)
         {
             if(phase == InputActionPhase.Started)
-                _strongAtkIN = true;
+                strongAtkIN = true;
             else
-                _strongAtkIN = false;
+                strongAtkIN = false;
         }
     #endregion
     
     private void Update()
     {
-        Debug.Log($"Attacking :" + _isAttacking);
-        if(_playerCombatState == CombatState.NotAttacking || _playerCombatState == CombatState.Attacking)
+        Debug.Log($"Attacking :" + isAttacking);
+        if(playerCombatState == CombatState.NotAttacking || playerCombatState == CombatState.Attacking)
         {
-            if(_basicAtkIN)
+            if(basicAtkIN)
             {
                 PlayerEventSystem.TriggerBasicAttack();                                                      //EVENT TRIGGERED
             }
-            else if(_strongAtkIN)
+            else if(strongAtkIN)
             {
                 PlayerEventSystem.TriggerStrongAttack();
             }
@@ -75,33 +76,33 @@ public class PlayerCombatSystem : MonoBehaviour
 
     private void CheckMoveable()
     {
-        if(Time.time >= _nextMove)
-            _isAttacking = false;
+        if(Time.time >= nextMove)
+            isAttacking = false;
     }
 
     private void AttackLogic(int indx)
     {        
         CheckHit(10, 10f);
-        // GameObject l_fx = Instantiate(l_atkFXPrefab, _atkFXParent.position, Quaternion.LookRotation(transform.forward));
-        // Destroy(l_fx, 1f);
+        // GameObject lfx = Instantiate(latkFXPrefab, atkFXParent.position, Quaternion.LookRotation(transform.forward));
+        // Destroy(lfx, 1f);
     }
 
     private void CheckHit(int damage, float force)
     {
-        if (Physics.Raycast(_raycastTrans.position, transform.forward, out _hit, _playerNormalAtkRange, layerMask))
+        if (Physics.Raycast(raycastTrans.position, transform.forward, out hit, playerNormalAtkRange, layerMask))
         {
-            GameObject l_hitObj = _hit.transform.gameObject;
+            GameObject lhitObj = hit.transform.gameObject;
 
-            CharacterHealth l_ds = l_hitObj.GetComponentInChildren<CharacterHealth>();
-            if(l_ds != null)
+            CharacterHealth lds = lhitObj.GetComponentInChildren<CharacterHealth>();
+            if(lds != null)
             {
                 PlayerEventSystem.TriggerSuccessfulHit();                                                       //EVENT TRIGGERED
             }
 
-            Rigidbody l_rb = l_hitObj.GetComponent<Rigidbody>();
-            if(l_rb != null)
+            Rigidbody lrb = lhitObj.GetComponent<Rigidbody>();
+            if(lrb != null)
             {
-                l_rb.AddForce(force * transform.forward, ForceMode.Impulse);
+                lrb.AddForce(force * transform.forward, ForceMode.Impulse);
             }
         }  
     }
@@ -109,23 +110,30 @@ public class PlayerCombatSystem : MonoBehaviour
     #region Animation Events
         public void Anticipation()
         {
-            _playerCombatState = CombatState.Anticipation;
-            PlayerEventSystem.CombatState(_playerCombatState);
-            _isAttacking = true;
+            playerCombatState = CombatState.Anticipation;
+            PlayerEventSystem.CombatState(playerCombatState);
+            isAttacking = true;
         }
 
         public void Attacking()
         {
-            _playerCombatState = CombatState.Attacking;
-            PlayerEventSystem.CombatState(_playerCombatState);
+            playerCombatState = CombatState.Attacking;
+            PlayerEventSystem.CombatState(playerCombatState);
+            PlayerEventSystem.TriggerForwardStep();                                                     //EVENT TRIGGERED
+        }
+
+        public void Guarding()
+        {
+            playerCombatState = CombatState.Attacking;
+            PlayerEventSystem.CombatState(playerCombatState);
             PlayerEventSystem.TriggerForwardStep();                                                     //EVENT TRIGGERED
         }
 
         public void NotAttacking()
         {
-            _playerCombatState = CombatState.NotAttacking;
-            PlayerEventSystem.CombatState(_playerCombatState);
-            _nextMove = Time.time + _movementTimeDelay;
+            playerCombatState = CombatState.NotAttacking;
+            PlayerEventSystem.CombatState(playerCombatState);
+            nextMove = Time.time + movementTimeDelay;
         }
     #endregion
 }

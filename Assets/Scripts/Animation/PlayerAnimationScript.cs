@@ -74,6 +74,11 @@ public class PlayerAnimationScript : AnimatorUtil
         AnimatorTrigger(_anim, "Death", 0.5f);
     }
 
+    public void SetGuarding(bool val)
+    {
+        _anim.SetBool("Guarding", val);
+    }
+
     public void SetGrounded(bool val)
     {
         _anim.SetBool("Grounded", val);
