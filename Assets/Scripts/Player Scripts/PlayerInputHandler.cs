@@ -34,8 +34,6 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler>
 
     private void OnEnable() 
     {
-        PlayerEventSystem.OnDeathEvent += UnalivePlayer;
-
         _playerInputActions.Enable();
     
         // Player input bindings
@@ -52,8 +50,6 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler>
 
     private void OnDisable() 
     {
-        PlayerEventSystem.OnDeathEvent -= UnalivePlayer;
-
         _playerInputActions.Disable();
 
         OnDisable(_playerInputActions.Player.Movement, inputContext => IfPlayerAlive(() => MoveEvent?.Invoke(inputContext.ReadValue<Vector2>(), inputContext.phase)));

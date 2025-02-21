@@ -1,18 +1,16 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
 
-public class PlayerMovement : Movement
+public class PlayerMovement : MovementAnimator
 {
     private void OnEnable() {
         PlayerInputHandler.MoveEvent += MoveInput;
         PlayerInputHandler.SprintEvent += SprintInput;
-        PlayerEventSystem.OnForwardStepEvent += ForwardStep;
     }
 
     private void OnDisable() {
         PlayerInputHandler.MoveEvent -= MoveInput;
         PlayerInputHandler.SprintEvent -= SprintInput;
-        PlayerEventSystem.OnForwardStepEvent -= ForwardStep;
     }
 
     #region Input Functions

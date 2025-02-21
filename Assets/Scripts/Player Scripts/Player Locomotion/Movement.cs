@@ -25,9 +25,9 @@ public class Movement : MonoBehaviour
     private bool _isGrounded;
     private bool _isGuarding = false;
     private Vector3 _velocity;
-    private PlayerAnimationScript _playerAnim;
     private CharacterController _cont;
-    private PlayerCombatSystem _combatSys;
+
+    protected Animator anim;
 
     //Input Variables
     protected Vector2 _movementIN;
@@ -38,8 +38,7 @@ public class Movement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _cont = GetComponent<CharacterController>();
-        _playerAnim = GetComponent<PlayerAnimationScript>();
-        _combatSys = GetComponent<PlayerCombatSystem>();
+        anim = GetComponent<Animator>();
     }
 
     void Guarding(bool val)
@@ -47,7 +46,7 @@ public class Movement : MonoBehaviour
         _isGuarding = val;
     }
 
-    private void Update() 
+    protected virtual void Update() 
     {
         Grounded();
         PlayerMovementFunction();
@@ -58,7 +57,6 @@ public class Movement : MonoBehaviour
     void Grounded()
     {
         _isGrounded = Physics.CheckSphere(_groundTrans.position, _distanceToGround, _groundLayer);
-        _playerAnim.SetGrounded(_isGrounded);
     }
     
     void PlayerMovementFunction()
@@ -80,17 +78,16 @@ public class Movement : MonoBehaviour
             }
 
             // Handle movement and animation states
-            if(_movDir.magnitude > 0.25f && _isGrounded && !_combatSys.IsAttacking)
+            if(_movDir.magnitude > 0.25f && _isGrounded)
             {
                 if(_sprintIN && (_movDir.z > 0f && (_movDir.x < 0.25f && _movDir.x > -0.25f)))
                 {
                     _moveSpeed = _runSpeed;
-                    PlayerEventSystem.CharacterRun();
                 }
                 else
                 {
+                    _sprintIN = false;
                     _moveSpeed = _walkSpeed;
-                    PlayerEventSystem.CharacterWalk();
                 }
                 Vector3 movDir = Quaternion.Euler(0f, _targAngle, 0f) * Vector3.forward;
                 Vector3 adjustedVelocity = movDir.normalized * _moveSpeed;
@@ -98,22 +95,14 @@ public class Movement : MonoBehaviour
             }
             else
             {
-                PlayerEventSystem.CharacterIdle();
                 _sprintIN = false;
                 ApplyFriction();
             }
-
-            _playerAnim.UpdateCharacterDirection(_movementIN);
         }
-        // else
-        // {
-        //     HandleGuarding();
-        // }
     }
 
     void ApplyFriction()
     {
-        PlayerEventSystem.CharacterIdle();
         float friction = _isGrounded ? _playerFriction : 0.05f;
         _velocity = Vector3.Lerp(_velocity, new Vector3(0f, _velocity.y, 0f), friction * Time.deltaTime);
     }

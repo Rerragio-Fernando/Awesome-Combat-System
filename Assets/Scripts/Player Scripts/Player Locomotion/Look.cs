@@ -44,13 +44,8 @@ public class Look : MonoBehaviour
 
     void HorizontalLook()
     {
-        PlayerEventSystem.CharacterTurn(lookIN.x);
         horizontalRot += lookIN.x * lookData.aimSensitivity;
-
-        if(!notAttacking) return;
-
         rotation = Mathf.Lerp(rotation, horizontalRot, turnSmoothTime * Time.deltaTime);
-
         transform.rotation = Quaternion.Euler(0f, rotation, 0f);
     }
 }
