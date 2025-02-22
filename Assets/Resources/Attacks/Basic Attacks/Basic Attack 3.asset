@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe8600faa8ed7d4ebdbc41e2ef1f102, type: 3}
   m_Name: Basic Attack 3
   m_EditorClassIdentifier: 
-  nextMeleeAttackTimeWindow: 0.5
+  nextMeleeAttackTimeWindow: 0.2
   animationStateName: Basic Attack 3
   crossFade: 0.2
