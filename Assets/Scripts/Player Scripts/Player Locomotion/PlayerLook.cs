@@ -20,6 +20,9 @@ public class PlayerLook : Look
                 lookIN = look;
             else
                 lookIN = Vector2.zero;
+            
+            lookIN = new Vector2(Mathf.Clamp(lookIN.x, -lookLimitter, lookLimitter), 
+            Mathf.Clamp(lookIN.y, -lookLimitter, lookLimitter));
         }
     #endregion
 }

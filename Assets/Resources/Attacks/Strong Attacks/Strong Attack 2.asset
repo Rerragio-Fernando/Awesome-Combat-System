@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbe8600faa8ed7d4ebdbc41e2ef1f102, type: 3}
-  m_Name: Basic Attack 2
+  m_Name: Strong Attack 2
   m_EditorClassIdentifier: 
-  animationStateName: Basic Attack 2
-  nextMeleeAttackTimeWindow: 1
+  nextMeleeAttackTimeWindow: 0.5
+  animationStateName: Strong Attack 2
+  crossFade: 0.2

@@ -13,7 +13,8 @@ public enum PlayerCombatState
     PLAYER_IDLE,
     PLAYER_BASIC_ATTACK,
     PLAYER_STRONG_ATTACK,
-    PLAYER_GUARD
+    PLAYER_GUARD,
+    PLAYER_TAKE_DAMAGE
 }
 
 public class ActionController : MonoBehaviour
@@ -21,6 +22,9 @@ public class ActionController : MonoBehaviour
     public Action BasicAttack;
     public Action StrongAttack;
     public Action Guard;
+
+    public Action TakeDamage;
+    
     public Action ResetAction;
 
     private PlayerCombatState playerCurrentState = PlayerCombatState.PLAYER_IDLE;
@@ -41,7 +45,7 @@ public class ActionController : MonoBehaviour
     }
 
     private void Update() {
-        Debug.Log($"Player Combat State: " + playerCurrentState);
+        // Debug.Log($"Player Combat State: " + playerCurrentState);
     }
 
     /// <summary>

@@ -16,4 +16,6 @@ public static class AnimationServices
     {
         anim.CrossFade(animation, crossFade);
     }
+    
+    // this.animator.GetCurrentAnimatorStateInfo(0).IsName("YourAnimationName")
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMeleeAttack : MeleeAttack
+public class PlayerBasicAttack : MeleeAttack
 {
     private ActionController controller;
 

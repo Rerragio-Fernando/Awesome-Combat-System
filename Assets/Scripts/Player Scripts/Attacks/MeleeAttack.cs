@@ -12,19 +12,33 @@ public class MeleeAttack : MonoBehaviour
     private int attackIndex = 0;
     private float nextCombo = 0f;
     private float nextComboWindow;
+    private float crossFadeHolder;
+    private bool firstAttack = true;
+
+    private const float defaultCrossFade = 0.2f;
 
     private void Start() 
     {
         anim = GetComponentInParent<Animator>();
+
+        crossFadeHolder = defaultCrossFade;
     }
 
+    /// <summary>
+    /// Attack logic goes here
+    /// </summary>
     protected void Attack()
     {
-        AnimationServices.PlayAnimation(anim, attackData[attackIndex].animationStateName);
+        AnimationServices.PlayAnimation(anim, attackData[attackIndex].animationStateName, crossFadeHolder);
         nextComboWindow = attackData[attackIndex].nextMeleeAttackTimeWindow;
+
+        // RetreiveData();
 
         if(Time.time <= nextCombo)
         {
+            //Holds the crossfade value for the previous attack
+            crossFadeHolder = attackData[attackIndex].crossFade;
+
             attackIndex++;
             if(attackIndex > attackData.Length - 1)
                 attackIndex = 0;
@@ -32,12 +46,25 @@ public class MeleeAttack : MonoBehaviour
         else
         {
             attackIndex = 0;
+            firstAttack = true;
+            crossFadeHolder = defaultCrossFade;
         }
     }
 
     protected void BackToEmpty()
     {
-        AnimationServices.PlayAnimation(anim, emptyAnimationStateName);
+        AnimationServices.PlayAnimation(anim, emptyAnimationStateName, crossFadeHolder);
         nextCombo = Time.time + nextComboWindow;
+
+        if(firstAttack)
+        {
+            attackIndex++;
+            firstAttack = false;
+        }
+    }
+
+    void RetreiveData()
+    {
+        Debug.Log($"Attack " + attackIndex + " performed. " + "Time.time = " + Time.time + " nextCombo = " + nextCombo);
     }
 }

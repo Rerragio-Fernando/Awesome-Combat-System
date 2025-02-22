@@ -103,9 +103,4 @@ public class Movement : MonoBehaviour
         float friction = isGrounded ? playerFriction : 0.05f;
         velocity = Vector3.Lerp(velocity, new Vector3(0f, velocity.y, 0f), friction * Time.deltaTime);
     }
-
-    public void ForwardStep()
-    {
-        velocity += transform.forward * movementData.forwardStepSpeed;
-    }
 }
