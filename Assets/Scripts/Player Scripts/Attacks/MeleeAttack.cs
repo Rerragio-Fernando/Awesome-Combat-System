@@ -1,28 +1,14 @@
 using UnityEngine;
 
-public class MeleeAttack : MonoBehaviour
+public class MeleeAttack : CombatAnimation
 {
     [SerializeField, Tooltip("Contains a list of all the relevant attacks")]
     private AttackData[] attackData;
 
-    [SerializeField, Tooltip("Name of Empty State in the Animator")]
-    private string emptyAnimationStateName = "Empty State";
-
-    private Animator anim;
     private int attackIndex = 0;
     private float nextCombo = 0f;
     private float nextComboWindow;
-    private float crossFadeHolder;
     private bool firstAttack = true;
-
-    private const float defaultCrossFade = 0.2f;
-
-    private void Start() 
-    {
-        anim = GetComponentInParent<Animator>();
-
-        crossFadeHolder = defaultCrossFade;
-    }
 
     /// <summary>
     /// Attack logic goes here
@@ -51,9 +37,10 @@ public class MeleeAttack : MonoBehaviour
         }
     }
 
-    protected void BackToEmpty()
+    protected override void ResetAnimationState()
     {
-        AnimationServices.PlayAnimation(anim, emptyAnimationStateName, crossFadeHolder);
+        base.ResetAnimationState();
+
         nextCombo = Time.time + nextComboWindow;
 
         if(firstAttack)

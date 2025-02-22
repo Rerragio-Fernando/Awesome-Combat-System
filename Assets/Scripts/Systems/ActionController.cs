@@ -31,17 +31,17 @@ public class ActionController : MonoBehaviour
     private PlayerCombatState playerNextState = PlayerCombatState.PLAYER_IDLE;
 
     private void OnEnable() {
-        PlayerInputHandler.BasicAttackEvent += (phase) => SetNextState(phase, PlayerCombatState.PLAYER_BASIC_ATTACK);
-        PlayerInputHandler.StrongAttackEvent += (phase) => SetNextState(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
+        PlayerInputHandler.BasicAttackEvent += (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_BASIC_ATTACK);
+        PlayerInputHandler.StrongAttackEvent += (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
 
-        PlayerInputHandler.GuardEvent += (phase) => SetNextState(phase, PlayerCombatState.PLAYER_GUARD);
+        PlayerInputHandler.GuardEvent += (phase) => SetNextStateHold(phase, PlayerCombatState.PLAYER_GUARD);
     }
 
     private void OnDisable() {
-        PlayerInputHandler.BasicAttackEvent -= (phase) => SetNextState(phase, PlayerCombatState.PLAYER_BASIC_ATTACK);
-        PlayerInputHandler.StrongAttackEvent -= (phase) => SetNextState(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
+        PlayerInputHandler.BasicAttackEvent -= (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_BASIC_ATTACK);
+        PlayerInputHandler.StrongAttackEvent -= (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
 
-        PlayerInputHandler.GuardEvent -= (phase) => SetNextState(phase, PlayerCombatState.PLAYER_GUARD);
+        PlayerInputHandler.GuardEvent -= (phase) => SetNextStateHold(phase, PlayerCombatState.PLAYER_GUARD);
     }
 
     private void Update() {
@@ -53,13 +53,23 @@ public class ActionController : MonoBehaviour
     /// </summary>
     /// <param name="phase">Input action phase</param>
     /// <param name="nextCombatState">The next combat state</param>
-    private void SetNextState(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
+    private void SetNextStateTap(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
     {
         if(playerCurrentState != PlayerCombatState.PLAYER_IDLE) return;
 
         if(phase == InputActionPhase.Performed)
             playerCurrentState = nextCombatState;
         
+        ExecuteAction();
+    }
+
+    private void SetNextStateHold(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
+    {
+        if(phase == InputActionPhase.Performed)
+            playerCurrentState = nextCombatState;
+        else if(phase == InputActionPhase.Canceled)
+            playerCurrentState = PlayerCombatState.PLAYER_IDLE;
+
         ExecuteAction();
     }
 

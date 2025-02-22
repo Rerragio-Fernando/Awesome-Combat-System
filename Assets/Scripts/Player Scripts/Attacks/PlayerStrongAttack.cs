@@ -12,7 +12,7 @@ public class PlayerStrongAttack : MeleeAttack
         if(controller != null)
         {
             controller.StrongAttack += Attack;
-            controller.ResetAction += BackToEmpty;
+            controller.ResetAction += ResetAnimationState;
         }
     }
 
@@ -20,7 +20,7 @@ public class PlayerStrongAttack : MeleeAttack
         if(controller != null)
         {
             controller.StrongAttack -= Attack;
-            controller.ResetAction -= BackToEmpty;
+            controller.ResetAction -= ResetAnimationState;
         }
     }
 }

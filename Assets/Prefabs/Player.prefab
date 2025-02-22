@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 5370410311610983525}
   - component: {fileID: 3739544699391942244}
   - component: {fileID: 850285573405496527}
+  - component: {fileID: 808300499029270380}
   m_Layer: 0
   m_Name: Player Graphics
   m_TagString: Untagged
@@ -164,6 +165,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d6426a87df340d4992ecce6d31b8c04, type: 2}
   - {fileID: 11400000, guid: 67abe83753295ca4fa1075db5fbfe8de, type: 2}
   emptyAnimationStateName: Empty State
+--- !u!114 &808300499029270380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316695526202300615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0abfd22f270f1c54291d8a9e1933964c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationStateName: Block Idle
 --- !u!1 &351116065199205710
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerBasicAttack : MeleeAttack
+public class PlayerGuardMechanic : GuardMechanic
 {
     private ActionController controller;
 
@@ -11,7 +11,7 @@ public class PlayerBasicAttack : MeleeAttack
     private void OnEnable() {
         if(controller != null)
         {
-            controller.BasicAttack += Attack;
+            controller.Guard += Guard;
             controller.ResetAction += ResetAnimationState;
         }
     }
@@ -19,7 +19,7 @@ public class PlayerBasicAttack : MeleeAttack
     private void OnDisable() {
         if(controller != null)
         {
-            controller.BasicAttack -= Attack;
+            controller.Guard -= Guard;
             controller.ResetAction -= ResetAnimationState;
         }
     }
