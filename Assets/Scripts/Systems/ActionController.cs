@@ -30,6 +30,8 @@ public class ActionController : MonoBehaviour
     private PlayerCombatState playerCurrentState = PlayerCombatState.PLAYER_IDLE;
     private PlayerCombatState playerNextState = PlayerCombatState.PLAYER_IDLE;
 
+    private bool holding = false;
+
     private void OnEnable() {
         PlayerInputHandler.BasicAttackEvent += (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_BASIC_ATTACK);
         PlayerInputHandler.StrongAttackEvent += (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
@@ -66,9 +68,17 @@ public class ActionController : MonoBehaviour
     private void SetNextStateHold(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
     {
         if(phase == InputActionPhase.Performed)
+        {
+            if(playerCurrentState != PlayerCombatState.PLAYER_IDLE) return;
+            
+            holding = true;
             playerCurrentState = nextCombatState;
-        else if(phase == InputActionPhase.Canceled)
-            playerCurrentState = PlayerCombatState.PLAYER_IDLE;
+        }
+        else if(phase == InputActionPhase.Canceled && holding)
+        {
+            holding = false;
+            HandleResetAction();
+        }
 
         ExecuteAction();
     }

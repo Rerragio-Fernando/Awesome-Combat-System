@@ -6,9 +6,7 @@ public class MeleeAttack : CombatAnimation
     private AttackData[] attackData;
 
     private int attackIndex = 0;
-
-    //Made static so all the melee attacks can transition from the same previous melee attacks "nextCombo"
-    private static float nextCombo = 0f;
+    private float nextCombo = 0f;
     private float nextComboWindow;
     private int attackDataLength;
 
@@ -33,7 +31,6 @@ public class MeleeAttack : CombatAnimation
         }
 
         AnimationServices.PlayAnimation(anim, attackData[attackIndex].animationStateName, crossFadeHolder);
-
         // Set the next combo window
         nextComboWindow = attackData[attackIndex].nextMeleeAttackTimeWindow;
 
