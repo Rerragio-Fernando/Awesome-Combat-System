@@ -6,52 +6,63 @@ public class MeleeAttack : CombatAnimation
     private AttackData[] attackData;
 
     private int attackIndex = 0;
-    private float nextCombo = 0f;
+
+    //Made static so all the melee attacks can transition from the same previous melee attacks "nextCombo"
+    private static float nextCombo = 0f;
     private float nextComboWindow;
-    private bool firstAttack = true;
+    private int attackDataLength;
+
+    private bool firstStrike = true;
+
+    protected override void Start()
+    {
+        base.Start();
+        attackDataLength = attackData.Length;
+    }
 
     /// <summary>
     /// Attack logic goes here
     /// </summary>
     protected void Attack()
     {
+        // Handle combo timing logic
+        if(Time.time > nextCombo)
+        {
+            firstStrike = true;
+            attackIndex = 0;
+        }
+
         AnimationServices.PlayAnimation(anim, attackData[attackIndex].animationStateName, crossFadeHolder);
+
+        // Set the next combo window
         nextComboWindow = attackData[attackIndex].nextMeleeAttackTimeWindow;
 
-        // RetreiveData();
+        RetreiveData();  // Assuming this is necessary and doesn't need optimization
 
+        // Handle first strike (initial attack in combo)
+        if(firstStrike)
+        {
+            firstStrike = false;
+            attackIndex = (attackIndex + 1) % attackDataLength;  // Use modulo for wrapping
+            return;
+        }
+
+        // Handle combo cycle (if within combo time window)
         if(Time.time <= nextCombo)
         {
-            //Holds the crossfade value for the previous attack
-            crossFadeHolder = attackData[attackIndex].crossFade;
+            attackIndex = (attackIndex + 1) % attackDataLength;  // Use modulo for wrapping
+        }
 
-            attackIndex++;
-            if(attackIndex > attackData.Length - 1)
-                attackIndex = 0;
-        }
-        else
-        {
-            attackIndex = 0;
-            firstAttack = true;
-            crossFadeHolder = defaultCrossFade;
-        }
     }
 
     protected override void ResetAnimationState()
     {
-        base.ResetAnimationState();
-
         nextCombo = Time.time + nextComboWindow;
-
-        if(firstAttack)
-        {
-            attackIndex++;
-            firstAttack = false;
-        }
+        base.ResetAnimationState();
     }
 
     void RetreiveData()
     {
-        Debug.Log($"Attack " + attackIndex + " performed. " + "Time.time = " + Time.time + " nextCombo = " + nextCombo);
+        Debug.Log(attackData[attackIndex].animationStateName + " performed. " + "Time.time = " + Time.time + " nextCombo = " + nextCombo);
     }
 }
