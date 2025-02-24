@@ -34,7 +34,7 @@ public class MeleeAttack : CombatAnimation
         // Set the next combo window
         nextComboWindow = attackData[attackIndex].nextMeleeAttackTimeWindow;
 
-        RetreiveData();  // Assuming this is necessary and doesn't need optimization
+        // RetreiveData();
 
         // Handle first strike (initial attack in combo)
         if(firstStrike)
