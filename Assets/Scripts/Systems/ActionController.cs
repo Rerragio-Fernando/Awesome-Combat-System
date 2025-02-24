@@ -31,6 +31,8 @@ public class ActionController : MonoBehaviour
     public PlayerCombatState playerNextState = PlayerCombatState.PLAYER_IDLE;
 
     private bool holding = false;
+
+    //Used to check if the action controller is currently executing a state (Which is not IDLE);
     private bool running = false;
 
     private void OnEnable() {
