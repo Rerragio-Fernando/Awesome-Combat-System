@@ -27,10 +27,11 @@ public class ActionController : MonoBehaviour
     
     public Action ResetAction;
 
-    private PlayerCombatState playerCurrentState = PlayerCombatState.PLAYER_IDLE;
-    private PlayerCombatState playerNextState = PlayerCombatState.PLAYER_IDLE;
+    public PlayerCombatState playerCurrentState = PlayerCombatState.PLAYER_IDLE;
+    public PlayerCombatState playerNextState = PlayerCombatState.PLAYER_IDLE;
 
     private bool holding = false;
+    private bool running = false;
 
     private void OnEnable() {
         PlayerInputHandler.BasicAttackEvent += (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_BASIC_ATTACK);
@@ -57,12 +58,17 @@ public class ActionController : MonoBehaviour
     /// <param name="nextCombatState">The next combat state</param>
     private void SetNextStateTap(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
     {
-        if(playerCurrentState != PlayerCombatState.PLAYER_IDLE) return;
+        if(running)
+        {
+            playerNextState = nextCombatState;
+            return;
+        }
 
         if(phase == InputActionPhase.Performed)
+        {
             playerCurrentState = nextCombatState;
-        
-        ExecuteAction();
+            ExecuteAction();
+        }        
     }
 
     private void SetNextStateHold(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
@@ -87,6 +93,7 @@ public class ActionController : MonoBehaviour
     /// Executes the current player state
     /// </summary>
     private void ExecuteAction(){
+        running = true;
         switch (playerCurrentState)
         {
             case PlayerCombatState.PLAYER_BASIC_ATTACK:
@@ -105,6 +112,12 @@ public class ActionController : MonoBehaviour
 
     public void HandleResetAction(){
         ResetAction?.Invoke();
-        playerCurrentState = PlayerCombatState.PLAYER_IDLE;
+        running = false;
+        playerCurrentState = playerNextState;
+        if(playerNextState != PlayerCombatState.PLAYER_IDLE)
+        {
+            ExecuteAction();
+            playerNextState = PlayerCombatState.PLAYER_IDLE;
+        }
     }
 }
