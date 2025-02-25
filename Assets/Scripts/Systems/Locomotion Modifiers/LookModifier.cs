@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class MovementModifier : MonoBehaviour
+public class LookModifier : MonoBehaviour
 {
     [SerializeField, Tooltip("Default Movement Modifier")]
-    private float defaultMovementModifier = 1f;
+    private float defaultLookModifier = 1f;
     
-    public float movementModifier;
+    public float lookModifier;
 
     private ActionController controller;
 
@@ -16,7 +16,7 @@ public class MovementModifier : MonoBehaviour
     private void OnEnable() {
         if(controller != null)
         {
-            controller.ModifyMovement += ModifyMovement;
+            controller.ModifyLook += ModifyLook;
             controller.ResetAction += ResetMovementModifier;
         }
     }
@@ -24,19 +24,18 @@ public class MovementModifier : MonoBehaviour
     private void OnDisable() {
         if(controller != null)
         {
-            controller.ModifyMovement -= ModifyMovement;
+            controller.ModifyLook -= ModifyLook;
             controller.ResetAction -= ResetMovementModifier;
         }
     }
 
-    protected void ModifyMovement(float val)
+    protected void ModifyLook(float val)
     {
-        movementModifier = val;
+        lookModifier = val;
     }
 
     protected void ResetMovementModifier()
     {
-        controller.ModifyMovement(defaultMovementModifier);
+        controller.ModifyLook(defaultLookModifier);
     }
-    
 }

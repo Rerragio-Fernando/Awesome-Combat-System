@@ -13,6 +13,8 @@ public class Look : MonoBehaviour
     private float rotation;
     private float verticalRot;
 
+    private float lookModifier = 1f;
+
     //Input Variables
     protected Vector2 lookIN;
     protected bool notAttacking;
@@ -33,7 +35,7 @@ public class Look : MonoBehaviour
     {
         // Calculate and clamp vertical rotation for the camera target
         verticalRot = Mathf.Clamp(
-            verticalRot - (lookIN.y * lookData.aimSensitivity),
+            verticalRot - (lookIN.y * lookData.aimSensitivity * lookModifier),
             lookData.minRotation,
             lookData.maxRotation
         );
@@ -44,8 +46,13 @@ public class Look : MonoBehaviour
 
     void HorizontalLook()
     {
-        horizontalRot += lookIN.x * lookData.aimSensitivity;
+        horizontalRot += lookIN.x * lookData.aimSensitivity * lookModifier;
         rotation = Mathf.Lerp(rotation, horizontalRot, turnSmoothTime * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0f, rotation, 0f);
+    }
+
+    protected void ModifyLook(float val)
+    {
+        lookModifier = val;
     }
 }

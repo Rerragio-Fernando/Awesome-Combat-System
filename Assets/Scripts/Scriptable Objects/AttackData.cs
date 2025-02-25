@@ -12,6 +12,9 @@ public class AttackData : ScriptableObject
     [Tooltip("Movement Modifier")]
     public float movementModifier;
 
+    [Tooltip("Look Modifier")]
+    public float lookModifier;
+
     [Header("Animator Related Properties")]
     [Tooltip("Name given in the Animator")]
     public string animationStateName;

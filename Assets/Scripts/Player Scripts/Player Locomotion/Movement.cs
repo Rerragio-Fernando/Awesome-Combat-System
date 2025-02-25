@@ -31,16 +31,13 @@ public class Movement : MonoBehaviour
     protected bool aimIN;
     protected bool sprintIN;
 
+    private float movementModifier = 1f;
+
     private void Start() 
     {
         Cursor.lockState = CursorLockMode.Locked;
         cont = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-    }
-
-    void Guarding(bool val)
-    {
-        isGuarding = val;
     }
 
     protected virtual void Update() 
@@ -58,43 +55,40 @@ public class Movement : MonoBehaviour
     
     void PlayerMovementFunction()
     {
-        if(!isGuarding)
+        // Handle vertical velocity
+        if(!isGrounded)
         {
-            // Handle vertical velocity
-            if(!isGrounded)
-            {
-                velocity.y += -gravity * movementData.playerMass * Time.deltaTime;
-            }
-            else
-            {
-                velocity.y = -1f;
-            }
+            velocity.y += -gravity * movementData.playerMass * Time.deltaTime;
+        }
+        else
+        {
+            velocity.y = -1f;
+        }
 
-            // Calculate movement direction and target angle
-            movDir = new Vector3(movementIN.x, 0f, movementIN.y).normalized;
-            targAngle = Mathf.Atan2(movDir.x, movDir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        // Calculate movement direction and target angle
+        movDir = new Vector3(movementIN.x, 0f, movementIN.y).normalized;
+        targAngle = Mathf.Atan2(movDir.x, movDir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
 
-            // Handle movement and animation states
-            if(movDir.magnitude > 0.25f && isGrounded)
+        // Handle movement and animation states
+        if(movDir.magnitude > 0.25f && isGrounded)
+        {
+            if(sprintIN && (movDir.z > 0f && (movDir.x < 0.25f && movDir.x > -0.25f)))
             {
-                if(sprintIN && (movDir.z > 0f && (movDir.x < 0.25f && movDir.x > -0.25f)))
-                {
-                    moveSpeed = movementData.runSpeed;
-                }
-                else
-                {
-                    sprintIN = false;
-                    moveSpeed = movementData.walkSpeed;
-                }
-                Vector3 moveDirection = Quaternion.Euler(0f, targAngle, 0f) * Vector3.forward;
-                Vector3 adjustedVelocity = moveDirection.normalized * moveSpeed;
-                velocity = new Vector3(adjustedVelocity.x, velocity.y, adjustedVelocity.z);
+                moveSpeed = movementData.runSpeed;
             }
             else
             {
                 sprintIN = false;
-                ApplyFriction();
+                moveSpeed = movementData.walkSpeed;
             }
+            Vector3 moveDirection = Quaternion.Euler(0f, targAngle, 0f) * Vector3.forward;
+            Vector3 adjustedVelocity = moveDirection.normalized * moveSpeed * movementModifier;
+            velocity = new Vector3(adjustedVelocity.x, velocity.y, adjustedVelocity.z);
+        }
+        else
+        {
+            sprintIN = false;
+            ApplyFriction();
         }
     }
 
@@ -102,5 +96,10 @@ public class Movement : MonoBehaviour
     {
         float friction = isGrounded ? playerFriction : 0.05f;
         velocity = Vector3.Lerp(velocity, new Vector3(0f, velocity.y, 0f), friction * Time.deltaTime);
+    }
+
+    protected void ModifyMovement(float val)
+    {
+        movementModifier = val;
     }
 }

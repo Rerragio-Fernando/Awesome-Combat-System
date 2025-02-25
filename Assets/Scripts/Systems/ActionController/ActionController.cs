@@ -24,6 +24,9 @@ public class ActionController : MonoBehaviour
     public Action Guard;
 
     public Action TakeDamage;
+
+    public Action<float> ModifyMovement;
+    public Action<float> ModifyLook;
     
     public Action ResetAction;
 

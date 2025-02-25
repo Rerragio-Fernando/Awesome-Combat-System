@@ -3,14 +3,30 @@ using UnityEngine;
 
 public class PlayerLook : Look
 {
+    private ActionController controller;
+
+    private void Awake() {
+        controller = GetComponentInParent<ActionController>();
+    }
+
     private void OnEnable() 
     {
         PlayerInputHandler.LookEvent += LookInput;
+
+        if(controller != null)
+        {
+            controller.ModifyLook += ModifyLook;
+        }
     }
 
     private void OnDisable() 
     {
         PlayerInputHandler.LookEvent -= LookInput;
+
+        if(controller != null)
+        {
+            controller.ModifyLook -= ModifyLook;
+        }
     }
 
     #region Input Functions

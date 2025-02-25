@@ -23,4 +23,11 @@ public class PlayerBasicAttack : MeleeAttack
             controller.ResetAction -= ResetAnimationState;
         }
     }
+
+    protected override void Attack()
+    {
+        base.Attack();
+        controller.ModifyMovement(movementModifier);
+        controller.ModifyLook(lookModifier);
+    }
 }

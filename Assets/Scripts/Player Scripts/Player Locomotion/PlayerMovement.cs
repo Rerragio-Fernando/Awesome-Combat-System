@@ -3,14 +3,30 @@ using UnityEngine;
 
 public class PlayerMovement : MovementAnimator
 {
+    private ActionController controller;
+
+    private void Awake() {
+        controller = GetComponentInParent<ActionController>();
+    }
+
     private void OnEnable() {
         PlayerInputHandler.MoveEvent += MoveInput;
         PlayerInputHandler.SprintEvent += SprintInput;
+
+        if(controller != null)
+        {
+            controller.ModifyMovement += ModifyMovement;
+        }
     }
 
     private void OnDisable() {
         PlayerInputHandler.MoveEvent -= MoveInput;
         PlayerInputHandler.SprintEvent -= SprintInput;
+
+        if(controller != null)
+        {
+            controller.ModifyMovement -= ModifyMovement;
+        }
     }
 
     #region Input Functions

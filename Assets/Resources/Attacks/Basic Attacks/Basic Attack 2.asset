@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Basic Attack 2
   m_EditorClassIdentifier: 
   nextMeleeAttackTimeWindow: 0.5
+  movementModifier: 0
   animationStateName: Basic Attack 2
   crossFade: 0.5

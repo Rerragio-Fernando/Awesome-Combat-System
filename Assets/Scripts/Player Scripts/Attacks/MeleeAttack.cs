@@ -12,6 +12,9 @@ public class MeleeAttack : CombatAnimation
 
     private bool firstStrike = true;
 
+    protected float movementModifier;
+    protected float lookModifier;
+
     protected override void Start()
     {
         base.Start();
@@ -21,7 +24,7 @@ public class MeleeAttack : CombatAnimation
     /// <summary>
     /// Attack logic goes here
     /// </summary>
-    protected void Attack()
+    protected virtual void Attack()
     {
         // Handle combo timing logic
         if(Time.time > nextCombo)
@@ -33,6 +36,8 @@ public class MeleeAttack : CombatAnimation
         AnimationServices.PlayAnimation(anim, attackData[attackIndex].animationStateName, crossFadeHolder);
         // Set the next combo window
         nextComboWindow = attackData[attackIndex].nextMeleeAttackTimeWindow;
+
+        movementModifier = attackData[attackIndex].movementModifier;
 
         // RetreiveData();
 
