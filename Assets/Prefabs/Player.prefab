@@ -2616,7 +2616,7 @@ MonoBehaviour:
   cameraTarget: {fileID: 1849522058008274733}
   lookData: {fileID: 11400000, guid: cc39acbaa7ffbf04a8819eff7ed986e2, type: 2}
   turnSmoothTime: 5
-  lookLimitter: 20
+  lookLimitter: 1
 --- !u!114 &6311284351836166276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2643,6 +2643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed813f843fa9a642875678ef47a83ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeCheck: 1
   playerCurrentState: 0
   playerNextState: 0
 --- !u!1 &7170174544366222603

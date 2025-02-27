@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +21,9 @@ public enum PlayerCombatState
 
 public class ActionController : MonoBehaviour
 {
+    [SerializeField, Tooltip("Time interval that will discard the next combat state of player")]
+    private float timeCheck;
+    
     public Action BasicAttack;
     public Action StrongAttack;
     public Action Guard;
@@ -32,6 +37,8 @@ public class ActionController : MonoBehaviour
 
     public PlayerCombatState playerCurrentState = PlayerCombatState.PLAYER_IDLE;
     public PlayerCombatState playerNextState = PlayerCombatState.PLAYER_IDLE;
+
+    private Coroutine discardTimer;
 
     private bool holding = false;
 
@@ -65,7 +72,7 @@ public class ActionController : MonoBehaviour
     {
         if(running)
         {
-            playerNextState = nextCombatState;
+            AssignToNextState(nextCombatState);
             return;
         }
 
@@ -92,6 +99,12 @@ public class ActionController : MonoBehaviour
         }
 
         ExecuteAction();
+    }
+
+    void AssignToNextState(PlayerCombatState nextCombatState)
+    {
+        playerNextState = nextCombatState;
+        StartDiscardTimer();
     }
 
     /// <summary>
@@ -124,5 +137,22 @@ public class ActionController : MonoBehaviour
             ExecuteAction();
             playerNextState = PlayerCombatState.PLAYER_IDLE;
         }
+    }
+
+    void StartDiscardTimer()
+    {
+        if(discardTimer != null)
+        {
+            StopCoroutine(discardTimer);
+            discardTimer = null;
+        }
+
+        discardTimer = StartCoroutine(DiscardTimer());
+    }
+
+    IEnumerator DiscardTimer()
+    {
+        yield return new WaitForSeconds(timeCheck);
+        playerNextState = PlayerCombatState.PLAYER_IDLE;
     }
 }

@@ -33,12 +33,10 @@ public class PlayerLook : Look
         void LookInput(Vector2 look, InputActionPhase phase)
         {
             if(phase == InputActionPhase.Performed)
-                lookIN = look;
+                lookIN = new Vector2(Mathf.Clamp(look.x, -lookLimitter, lookLimitter), 
+            Mathf.Clamp(look.y, -lookLimitter, lookLimitter));
             else
                 lookIN = Vector2.zero;
-            
-            lookIN = new Vector2(Mathf.Clamp(lookIN.x, -lookLimitter, lookLimitter), 
-            Mathf.Clamp(lookIN.y, -lookLimitter, lookLimitter));
         }
     #endregion
 }
