@@ -16,6 +16,7 @@ public enum PlayerCombatState
     PLAYER_BASIC_ATTACK,
     PLAYER_STRONG_ATTACK,
     PLAYER_GUARD,
+    PLAYER_WEAPON_CYCLE,
     PLAYER_TAKE_DAMAGE
 }
 
@@ -27,6 +28,8 @@ public class ActionController : MonoBehaviour
     public Action BasicAttack;
     public Action StrongAttack;
     public Action Guard;
+
+    public Action CycleWeapon;
 
     public Action TakeDamage;
 
@@ -50,6 +53,8 @@ public class ActionController : MonoBehaviour
         PlayerInputHandler.StrongAttackEvent += (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
 
         PlayerInputHandler.GuardEvent += (phase) => SetNextStateHold(phase, PlayerCombatState.PLAYER_GUARD);
+
+        PlayerInputHandler.CycleWeaponEvent += (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_WEAPON_CYCLE);
     }
 
     private void OnDisable() {
@@ -57,6 +62,8 @@ public class ActionController : MonoBehaviour
         PlayerInputHandler.StrongAttackEvent -= (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
 
         PlayerInputHandler.GuardEvent -= (phase) => SetNextStateHold(phase, PlayerCombatState.PLAYER_GUARD);
+
+        PlayerInputHandler.CycleWeaponEvent -= (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_WEAPON_CYCLE);
     }
 
     private void Update() {
@@ -124,6 +131,10 @@ public class ActionController : MonoBehaviour
             
             case PlayerCombatState.PLAYER_GUARD:
                 Guard?.Invoke();
+                break;
+            
+            case PlayerCombatState.PLAYER_WEAPON_CYCLE:
+                CycleWeapon?.Invoke();
                 break;
         }
     }

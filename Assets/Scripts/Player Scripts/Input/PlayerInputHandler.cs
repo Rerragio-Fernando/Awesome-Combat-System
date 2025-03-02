@@ -25,6 +25,8 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler>
     public static event Action<InputActionPhase> BasicAttackEvent;
     public static event Action<InputActionPhase> StrongAttackEvent;
 
+    public static event Action<InputActionPhase> CycleWeaponEvent;
+
     protected override void Awake()
     {
         base.Awake();
@@ -46,6 +48,8 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler>
 
         OnEnable(_playerInputActions.Player.BasicAttack, inputContext => IfPlayerAlive(() => BasicAttackEvent?.Invoke(inputContext.phase)));
         OnEnable(_playerInputActions.Player.StrongAttack, inputContext => IfPlayerAlive(() => StrongAttackEvent?.Invoke(inputContext.phase)));
+
+        OnEnable(_playerInputActions.Player.CycleWeapon, inputContext => IfPlayerAlive(() => CycleWeaponEvent?.Invoke(inputContext.phase)));
     }
 
     private void OnDisable() 
@@ -61,6 +65,8 @@ public class PlayerInputHandler : SingletonBehaviour<PlayerInputHandler>
 
         OnDisable(_playerInputActions.Player.BasicAttack, inputContext => IfPlayerAlive(() => BasicAttackEvent?.Invoke(inputContext.phase)));
         OnDisable(_playerInputActions.Player.StrongAttack, inputContext => IfPlayerAlive(() => StrongAttackEvent?.Invoke(inputContext.phase)));
+
+        OnDisable(_playerInputActions.Player.CycleWeapon, inputContext => IfPlayerAlive(() => CycleWeaponEvent?.Invoke(inputContext.phase)));
     }
 
     private void IfPlayerAlive(Action action)

@@ -12,9 +12,14 @@ public static class AnimationServices
         animator.SetFloat(parameterName, val);
     }
 
-    public static void PlayAnimation(Animator anim, string animation, float crossFade = 0.2f)
+    public static void PlayAnimation(Animator anim, string animationState, float crossFade = 0.2f)
     {
-        anim.CrossFade(animation, crossFade);
+        anim.CrossFade(animationState, crossFade);
+    }
+
+    public static void PlayAnimation(Animator anim, string animationState, int layerIndex, float crossFade = 0.2f)
+    {
+        anim.CrossFade(animationState, crossFade, layerIndex);
     }
     
     // this.animator.GetCurrentAnimatorStateInfo(0).IsName("YourAnimationName")
