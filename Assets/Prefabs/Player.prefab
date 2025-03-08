@@ -1270,7 +1270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8704943581448200381}
-  - component: {fileID: 6661484306091336516}
+  - component: {fileID: 6574406924405730889}
   - component: {fileID: 2652334706485587184}
   - component: {fileID: 3169108924870384190}
   - component: {fileID: 1915282545693325341}
@@ -1297,7 +1297,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8180807234357793452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6661484306091336516
+--- !u!114 &6574406924405730889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1306,13 +1306,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3390968928250079806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1746b1f31b06a0441bc962df32c91d93, type: 3}
+  m_Script: {fileID: 11500000, guid: e71d5696b808f1544bf63b2dfdcdaba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData:
     weaponName: Hand To Hand
+    movementData: {fileID: 11400000, guid: 58839035d5ce11a42b630909b161430d, type: 2}
     weaponGraphics: {fileID: 0}
     weaponMovementBlendTreeName: Hand Movement
+    weaponEquipAnimationName: Axe Arm
+    weaponUnEquipAnimationName: Axe Disarm
 --- !u!114 &2652334706485587184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2491,7 +2494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9118442170653899498}
-  - component: {fileID: 381187742069661585}
+  - component: {fileID: 2197950585041334079}
   - component: {fileID: 2924466833577503303}
   - component: {fileID: 1187402746525002015}
   - component: {fileID: 5268307291100426077}
@@ -2518,7 +2521,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8180807234357793452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &381187742069661585
+--- !u!114 &2197950585041334079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2527,13 +2530,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6725040195835764757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1746b1f31b06a0441bc962df32c91d93, type: 3}
+  m_Script: {fileID: 11500000, guid: e71d5696b808f1544bf63b2dfdcdaba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData:
     weaponName: Axe
+    movementData: {fileID: 11400000, guid: 0e01cec0463e7264c92d62d58afcc828, type: 2}
     weaponGraphics: {fileID: 650091635332567757}
     weaponMovementBlendTreeName: Axe Movement
+    weaponEquipAnimationName: Axe Arm
+    weaponUnEquipAnimationName: Axe Disarm
 --- !u!114 &2924466833577503303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2800,6 +2806,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundTrans: {fileID: 1774116576499877692}
+  movementModifier: 1
   movementParameterName: Movement
   directionXParameterName: XDirection
   directionYParameterName: YDirection

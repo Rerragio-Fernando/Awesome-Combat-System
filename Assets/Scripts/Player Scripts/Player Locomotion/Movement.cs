@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,13 +32,23 @@ public class Movement : MonoBehaviour
     protected bool aimIN;
     protected bool sprintIN;
 
-    private float movementModifier = 1f;
+    public float movementModifier = 1f;
+
+    public Action<PlayerMovementData> ChangePlayerMovementEvent;
 
     private void Start() 
     {
         Cursor.lockState = CursorLockMode.Locked;
         cont = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+    }
+
+    private void OnEnable() {
+        ChangePlayerMovementEvent += SetMovementAsset;
+    }
+
+    private void OnDisable() {
+        ChangePlayerMovementEvent -= SetMovementAsset;
     }
 
     protected virtual void Update() 
@@ -101,5 +112,10 @@ public class Movement : MonoBehaviour
     protected void ModifyMovement(float val)
     {
         movementModifier = val;
+    }
+
+    private void SetMovementAsset(PlayerMovementData asset)
+    {
+        movementData = asset;
     }
 }

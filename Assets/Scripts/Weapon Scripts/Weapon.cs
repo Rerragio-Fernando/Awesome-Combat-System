@@ -7,12 +7,12 @@ public class Weapon : MonoBehaviour
 
     public WeaponData PlayerWeaponData => weaponData;
 
-    private void OnEnable() {
+    protected virtual void OnEnable() {
         if(weaponData.weaponGraphics != null)
-            weaponData.weaponGraphics.SetActive(true);
+            weaponData.weaponGraphics.SetActive(true);            
     }
 
-    private void OnDisable() {
+    protected virtual void OnDisable() {
         if(weaponData.weaponGraphics != null)
             weaponData.weaponGraphics.SetActive(false);
     }
@@ -23,6 +23,9 @@ public struct WeaponData
 {
     [Tooltip("Weapon Name")]
     public string weaponName;
+
+    [Tooltip("Weapon Movement Speed")]
+    public PlayerMovementData movementData;
 
     [Tooltip("Weapon Graphics")]
     public GameObject weaponGraphics;

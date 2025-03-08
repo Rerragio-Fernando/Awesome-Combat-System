@@ -5,7 +5,13 @@ public class WeaponHolster : CombatAnimation
     private GameObject[] weaponInventory;
     private int activeWeaponIndex = 0;
 
-    private void Start() {
+    private Movement movement;
+
+    protected override void Start() {
+        base.Start();
+
+        movement = GetComponentInParent<Movement>();
+
         weaponInventory = new GameObject[this.transform.childCount];
 
         for (int i = 0; i < weaponInventory.Length; i++)
@@ -21,13 +27,29 @@ public class WeaponHolster : CombatAnimation
     {
         int prevIndex = activeWeaponIndex;
         activeWeaponIndex = (activeWeaponIndex + 1) % weaponInventory.Length;
+
+        string unEquipAnimationState = weaponInventory[prevIndex].GetComponent<Weapon>().PlayerWeaponData.weaponUnEquipAnimationName;
+
+        //Un Equip
+        if(unEquipAnimationState != "")
+            AnimationServices.PlayAnimation(anim, unEquipAnimationState, crossFadeHolder);
         
         weaponInventory[activeWeaponIndex].SetActive(true);
         weaponInventory[prevIndex].SetActive(false);
+
+        if(movement != null)
+        {
+            Debug.Log($"{weaponInventory[activeWeaponIndex].GetComponent<Weapon>().PlayerWeaponData.movementData.walkSpeed}");
+            movement.ChangePlayerMovementEvent?.Invoke(weaponInventory[activeWeaponIndex].GetComponent<Weapon>().PlayerWeaponData.movementData);
+        }
     }
 
     protected void ResetAnimationState()
     {
+        string equipAnimationState = weaponInventory[activeWeaponIndex].GetComponent<Weapon>().PlayerWeaponData.weaponEquipAnimationName;
         
+        //Equip
+        if(equipAnimationState != "")
+            AnimationServices.PlayAnimation(anim, equipAnimationState, crossFadeHolder);
     }
 }
