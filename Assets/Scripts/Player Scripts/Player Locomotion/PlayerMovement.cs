@@ -9,7 +9,9 @@ public class PlayerMovement : MovementAnimator
         controller = GetComponentInParent<ActionController>();
     }
 
-    private void OnEnable() {
+    protected override void OnEnable() {
+        base.OnEnable();
+        
         PlayerInputHandler.MoveEvent += MoveInput;
         PlayerInputHandler.SprintEvent += SprintInput;
 
@@ -19,7 +21,9 @@ public class PlayerMovement : MovementAnimator
         }
     }
 
-    private void OnDisable() {
+    protected override void OnDisable() {
+        base.OnDisable();
+
         PlayerInputHandler.MoveEvent -= MoveInput;
         PlayerInputHandler.SprintEvent -= SprintInput;
 

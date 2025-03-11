@@ -43,11 +43,11 @@ public class Movement : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    private void OnEnable() {
+    protected virtual void OnEnable() {
         ChangePlayerMovementEvent += SetMovementAsset;
     }
 
-    private void OnDisable() {
+    protected virtual void OnDisable() {
         ChangePlayerMovementEvent -= SetMovementAsset;
     }
 

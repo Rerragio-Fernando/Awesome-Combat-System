@@ -5,12 +5,12 @@ public class WeaponHolster : CombatAnimation
     private GameObject[] weaponInventory;
     private int activeWeaponIndex = 0;
 
-    private Movement movement;
+    private PlayerMovement movement;
 
     protected override void Start() {
         base.Start();
 
-        movement = GetComponentInParent<Movement>();
+        movement = GetComponentInParent<PlayerMovement>();
 
         weaponInventory = new GameObject[this.transform.childCount];
 
