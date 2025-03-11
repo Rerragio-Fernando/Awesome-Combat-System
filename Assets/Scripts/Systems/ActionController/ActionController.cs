@@ -45,7 +45,9 @@ public class ActionController : MonoBehaviour
 
     private bool holding = false;
 
-    //Used to check if the action controller is currently executing a state (Which is not IDLE);
+    /// <summary>
+    /// Used to check if the action controller is currently executing a state (Which is not IDLE);
+    /// </summary>
     private bool running = false;
 
     private void OnEnable() {
