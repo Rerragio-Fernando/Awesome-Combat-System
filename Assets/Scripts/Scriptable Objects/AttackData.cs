@@ -6,8 +6,17 @@ using UnityEngine;
 public class AttackData : ScriptableObject
 {
     [Header("Attack Properties")]
+    [Tooltip("Hit Force")]
+    public float hitForce;
+
     [Tooltip("Time window in which when attacked it will continue the combo")]
     public float nextMeleeAttackTimeWindow;
+
+    [Tooltip("Radius of Check-Sphere")]
+    public float checkSphereRadius = 0.5f;
+
+    [Tooltip("Attack Hit Layer")]
+    public LayerMask hitLayerMask;
 
     [Tooltip("Movement Modifier")]
     public float movementModifier;

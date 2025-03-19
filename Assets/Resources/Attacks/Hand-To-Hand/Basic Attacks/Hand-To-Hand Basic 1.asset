@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe8600faa8ed7d4ebdbc41e2ef1f102, type: 3}
   m_Name: Hand-To-Hand Basic 1
   m_EditorClassIdentifier: 
+  hitForce: 10
   nextMeleeAttackTimeWindow: 0.5
+  checkSphereRadius: 0.5
+  hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   movementModifier: 0
   lookModifier: 0
   animationStateName: Punch 1
