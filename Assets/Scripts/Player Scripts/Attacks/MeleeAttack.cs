@@ -98,6 +98,8 @@ public class MeleeAttack : CombatAnimation
         {
             Debug.Log($"{hitPoint.name} Hit an object");
             hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * attackData[attackIndex].hitForce, ForceMode.Impulse);
+
+            var hitFx = Instantiate(attackData[attackIndex].hitFx, hitPoint.position, Quaternion.identity);
         }
     }
 

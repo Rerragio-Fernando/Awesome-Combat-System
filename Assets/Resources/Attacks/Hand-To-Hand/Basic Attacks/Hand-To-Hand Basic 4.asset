@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbe8600faa8ed7d4ebdbc41e2ef1f102, type: 3}
-  m_Name: Hand-To-Hand Strong 1
+  m_Name: Hand-To-Hand Basic 4
   m_EditorClassIdentifier: 
-  hitForce: 50
+  hitForce: 10
   forwardStep: 5
-  nextMeleeAttackTimeWindow: 0.25
+  nextMeleeAttackTimeWindow: 0.5
   checkSphereRadius: 0.5
   hitLayerMask:
     serializedVersion: 2
     m_Bits: 64
   movementModifier: 0
   lookModifier: 0
-  animationStateName: Kick 1
+  animationStateName: Punch 4
   crossFade: 0.5
-  hitFx: {fileID: 1351971699517528, guid: 7e8a0869a599e3b4b80673e467868254, type: 3}
+  hitFx: {fileID: 1274793349893442, guid: 02a6f9dd941131e4d85d39332183eeb6, type: 3}

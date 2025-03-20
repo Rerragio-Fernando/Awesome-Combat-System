@@ -33,4 +33,7 @@ public class AttackData : ScriptableObject
 
     [Tooltip("Cross-Fade duration")]
     public float crossFade;
+
+    [Header("VFX Properties")]
+    public GameObject hitFx;
 }
