@@ -18,6 +18,7 @@ public class PlayerMovement : MovementAnimator
         if(controller != null)
         {
             controller.ModifyMovement += ModifyMovement;
+            controller.ModifyForwardStep += ModifyForwardStep;
         }
     }
 
@@ -30,6 +31,7 @@ public class PlayerMovement : MovementAnimator
         if(controller != null)
         {
             controller.ModifyMovement -= ModifyMovement;
+            controller.ModifyForwardStep -= ModifyForwardStep;
         }
     }
 

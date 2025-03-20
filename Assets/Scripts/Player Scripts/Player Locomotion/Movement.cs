@@ -33,6 +33,7 @@ public class Movement : MonoBehaviour
     protected bool sprintIN;
 
     public float movementModifier = 1f;
+    public float stepMultiplier = 1f;
 
     public Action<PlayerMovementData> ChangePlayerMovementEvent;
 
@@ -107,6 +108,16 @@ public class Movement : MonoBehaviour
     {
         float friction = isGrounded ? playerFriction : 0.05f;
         velocity = Vector3.Lerp(velocity, new Vector3(0f, velocity.y, 0f), friction * Time.deltaTime);
+    }
+
+    protected void ModifyForwardStep(float value)
+    {
+        stepMultiplier = value;
+    }
+
+    public void ForwardStep()
+    {
+        velocity += transform.forward * stepMultiplier; 
     }
 
     protected void ModifyMovement(float val)

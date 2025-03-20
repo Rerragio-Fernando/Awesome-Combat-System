@@ -11,7 +11,4 @@ public class PlayerMovementData : ScriptableObject
 
     [Tooltip("Player Run Speed")]
     public float runSpeed;
-
-    [Tooltip("Player Forward Step Speed")]
-    public float forwardStepSpeed;
 }

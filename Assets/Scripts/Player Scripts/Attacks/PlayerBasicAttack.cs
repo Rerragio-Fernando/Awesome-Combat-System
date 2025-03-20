@@ -35,5 +35,6 @@ public class PlayerBasicAttack : MeleeAttack
         base.Attack();
         controller.ModifyMovement(movementModifier);
         controller.ModifyLook(lookModifier);
+        controller.ModifyForwardStep(forwardStepModifier);
     }
 }

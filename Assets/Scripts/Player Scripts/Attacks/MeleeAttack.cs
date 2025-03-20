@@ -17,6 +17,7 @@ public class MeleeAttack : CombatAnimation
 
     protected float movementModifier;
     protected float lookModifier;
+    protected float forwardStepModifier;
 
     private HitRegisterController hitRegController;
 
@@ -61,6 +62,8 @@ public class MeleeAttack : CombatAnimation
         nextComboWindow = attackData[attackIndex].nextMeleeAttackTimeWindow;
 
         movementModifier = attackData[attackIndex].movementModifier;
+
+        forwardStepModifier = attackData[attackIndex].forwardStep;
 
         // RetreiveData();
 

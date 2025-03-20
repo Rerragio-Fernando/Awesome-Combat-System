@@ -34,6 +34,7 @@ public class ActionController : MonoBehaviour
     public Action TakeDamage;
 
     public Action<float> ModifyMovement;
+    public Action<float> ModifyForwardStep;
     public Action<float> ModifyLook;
     
     public Action ResetAction;

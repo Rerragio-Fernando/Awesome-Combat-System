@@ -10,7 +10,7 @@ public class PlayerStrongAttack : MeleeAttack
         controller = GetComponentInParent<ActionController>();
     }
 
-    private void OnEnable() {
+    protected override void OnEnable() {
         base.OnEnable();
 
         if(controller != null)
@@ -20,7 +20,7 @@ public class PlayerStrongAttack : MeleeAttack
         }
     }
 
-    private void OnDisable() {
+    protected override void OnDisable() {
         base.OnDisable();
         
         if(controller != null)
@@ -35,5 +35,6 @@ public class PlayerStrongAttack : MeleeAttack
         base.Attack();
         controller.ModifyMovement(movementModifier);
         controller.ModifyLook(lookModifier);
+        controller.ModifyForwardStep(forwardStepModifier);
     }
 }

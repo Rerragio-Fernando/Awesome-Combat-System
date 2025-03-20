@@ -9,6 +9,9 @@ public class AttackData : ScriptableObject
     [Tooltip("Hit Force")]
     public float hitForce;
 
+    [Tooltip("Forward Step Force")]
+    public float forwardStep;
+
     [Tooltip("Time window in which when attacked it will continue the combo")]
     public float nextMeleeAttackTimeWindow;
 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Basic Attack 3
   m_EditorClassIdentifier: 
   hitForce: 20
+  forwardStep: 10
   nextMeleeAttackTimeWindow: 0.5
   checkSphereRadius: 0.5
   hitLayerMask:

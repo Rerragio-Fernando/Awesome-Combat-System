@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hand-To-Hand Strong 3
   m_EditorClassIdentifier: 
   hitForce: 50
+  forwardStep: 20
   nextMeleeAttackTimeWindow: 0.25
   checkSphereRadius: 0.5
   hitLayerMask:
