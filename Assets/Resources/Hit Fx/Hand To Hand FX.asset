@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95be40cdaee0624e813f9ea2942211f, type: 3}
+  m_Name: Hand To Hand FX
+  m_EditorClassIdentifier: 
+  missFx: {fileID: 102696, guid: 185035e4680c4b344b62bf5ace4674b8, type: 3}
+  lightHitFx: {fileID: 1274793349893442, guid: 02a6f9dd941131e4d85d39332183eeb6, type: 3}
+  strongHitFx: {fileID: 1791144729913606, guid: 4e857e4ca7072874ea6f813587ce3d60, type: 3}
+  criticalHitFx: {fileID: 1796368087707688, guid: 62287e9b80552c143a473e54d74f11e8, type: 3}

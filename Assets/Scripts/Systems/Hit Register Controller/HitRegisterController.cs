@@ -10,3 +10,26 @@ public class HitRegisterController : MonoBehaviour
         RegisterHitEvent?.Invoke(hitPointIndex);
     }
 }
+
+public enum HitLevel
+{
+    MISS,
+    LIGHT,
+    STRONG,
+    CRITICAL
+}
+
+[System.Serializable]
+public class Hit
+{
+    public HitLevel hitLevel;
+    public float hitAmount;
+
+    public Hit(HitLevel hL, float hA)
+    {
+        hitLevel = hL;
+        hitAmount = hA;
+
+        Debug.Log($"{hL}");
+    }
+}

@@ -7,7 +7,7 @@ public class AttackData : ScriptableObject
 {
     [Header("Attack Properties")]
     [Tooltip("Hit Force")]
-    public float hitForce;
+    public float maxHitForce;
 
     [Tooltip("Forward Step Force")]
     public float forwardStep;
@@ -35,5 +35,5 @@ public class AttackData : ScriptableObject
     public float crossFade;
 
     [Header("VFX Properties")]
-    public GameObject hitFx;
+    public HitFxData hitFxData;
 }

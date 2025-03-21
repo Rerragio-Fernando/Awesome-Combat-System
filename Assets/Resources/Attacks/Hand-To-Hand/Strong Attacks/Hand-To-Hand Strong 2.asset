@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe8600faa8ed7d4ebdbc41e2ef1f102, type: 3}
   m_Name: Hand-To-Hand Strong 2
   m_EditorClassIdentifier: 
-  hitForce: 30
+  maxHitForce: 20
   forwardStep: 5
   nextMeleeAttackTimeWindow: 0.25
   checkSphereRadius: 0.5
@@ -23,4 +23,4 @@ MonoBehaviour:
   lookModifier: 0
   animationStateName: Kick 2
   crossFade: 0.5
-  hitFx: {fileID: 1351971699517528, guid: 7e8a0869a599e3b4b80673e467868254, type: 3}
+  hitFxData: {fileID: 11400000, guid: 4c0ffaf18a86b1c489396d6006389b6a, type: 2}

@@ -20,9 +20,12 @@ public class MeleeAttack : CombatAnimation
     protected float forwardStepModifier;
 
     private HitRegisterController hitRegController;
+    private PlayerStatManager playerStatManager;
+    private Hit playerAttackHit;
 
     protected virtual void Awake() {
         hitRegController = GetComponentInParent<HitRegisterController>();
+        playerStatManager = GetComponentInParent<PlayerStatManager>();
     }
 
     protected override void Start()
@@ -65,6 +68,9 @@ public class MeleeAttack : CombatAnimation
 
         forwardStepModifier = attackData[attackIndex].forwardStep;
 
+        //Assign Hit Probability
+        playerAttackHit = playerStatManager.GetHitProbability();
+
         // RetreiveData();
 
         // Handle first strike (initial attack in combo)
@@ -85,6 +91,8 @@ public class MeleeAttack : CombatAnimation
 
     public void HitFrame(int contactPointIndex)
     {
+        if(playerAttackHit == null) return;
+
         Transform hitPoint = contactPointsList[contactPointIndex];
 
         if(hitPoint == null)
@@ -93,13 +101,24 @@ public class MeleeAttack : CombatAnimation
             return;
         }
 
+        float force = attackData[attackIndex].maxHitForce * playerAttackHit.hitAmount;
+        
+        GameObject attackHitFx;
+        if(playerAttackHit.hitLevel == HitLevel.MISS)
+            attackHitFx = attackData[attackIndex].hitFxData.missFx;
+        else if(playerAttackHit.hitLevel == HitLevel.LIGHT)
+            attackHitFx = attackData[attackIndex].hitFxData.lightHitFx;
+        else if(playerAttackHit.hitLevel == HitLevel.LIGHT)
+            attackHitFx = attackData[attackIndex].hitFxData.strongHitFx;
+        else
+            attackHitFx = attackData[attackIndex].hitFxData.criticalHitFx;
+
         Collider[] hitColliders = Physics.OverlapSphere(hitPoint.position, attackData[attackIndex].checkSphereRadius, attackData[attackIndex].hitLayerMask);
         foreach (var hitCollider in hitColliders)
         {
-            Debug.Log($"{hitPoint.name} Hit an object");
-            hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * attackData[attackIndex].hitForce, ForceMode.Impulse);
+            hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * force, ForceMode.Impulse);
 
-            var hitFx = Instantiate(attackData[attackIndex].hitFx, hitPoint.position, Quaternion.identity);
+            var hitFx = Instantiate(attackHitFx, hitPoint.position, Quaternion.identity);
         }
     }
 

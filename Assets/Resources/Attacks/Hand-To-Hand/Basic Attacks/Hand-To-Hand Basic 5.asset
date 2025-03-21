@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe8600faa8ed7d4ebdbc41e2ef1f102, type: 3}
   m_Name: Hand-To-Hand Basic 5
   m_EditorClassIdentifier: 
-  hitForce: 10
+  maxHitForce: 10
   forwardStep: 5
   nextMeleeAttackTimeWindow: 0.5
   checkSphereRadius: 0.5
@@ -23,4 +23,4 @@ MonoBehaviour:
   lookModifier: 0
   animationStateName: Punch 5
   crossFade: 0.5
-  hitFx: {fileID: 1274793349893442, guid: 02a6f9dd941131e4d85d39332183eeb6, type: 3}
+  hitFxData: {fileID: 11400000, guid: 4c0ffaf18a86b1c489396d6006389b6a, type: 2}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe8600faa8ed7d4ebdbc41e2ef1f102, type: 3}
   m_Name: Strong Attack 3
   m_EditorClassIdentifier: 
-  hitForce: 60
+  maxHitForce: 0
   forwardStep: 10
   nextMeleeAttackTimeWindow: 0.25
   checkSphereRadius: 0.5
@@ -23,4 +23,4 @@ MonoBehaviour:
   lookModifier: 0
   animationStateName: Strong Attack 3
   crossFade: 0.5
-  hitFx: {fileID: 139844, guid: bd9cbf3a6ae77524788b4bbdb5422498, type: 3}
+  hitFxData: {fileID: 11400000, guid: 66a41bc8495938046b2d66e39bf49132, type: 2}
