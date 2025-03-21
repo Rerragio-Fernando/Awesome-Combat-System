@@ -5,10 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Attack Data", menuName = "Scriptable Objects/Player Skills Data/Attack Data")]
 public class AttackData : ScriptableObject
 {
-    [Header("Attack Properties")]
+    [Header("Attack Stat Properties")]
     [Tooltip("Hit Force")]
     public float maxHitForce;
 
+    [Tooltip("Hit Damage")]
+    public float maxHitDamage;
+
+    [Header("Attack Physical Properties")]
     [Tooltip("Forward Step Force")]
     public float forwardStep;
 

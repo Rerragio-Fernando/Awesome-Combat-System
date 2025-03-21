@@ -3,6 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerStatData", menuName = "Scriptable Objects/Player Skills Data/Stat Data")]
 public class PlayerStatData : ScriptableObject
 {
+    [Tooltip("Player Max HP")]
+    public float playerMaxHP = 100f;
+
     [Tooltip("Miss Probability Threshold"), Range(0f, 1f)]
     public float missThreshold;
 
