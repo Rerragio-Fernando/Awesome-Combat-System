@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95be40cdaee0624e813f9ea2942211f, type: 3}
   m_Name: Axe FX
   m_EditorClassIdentifier: 
-  missFx: {fileID: 102696, guid: 185035e4680c4b344b62bf5ace4674b8, type: 3}
-  lightHitFx: {fileID: 1274793349893442, guid: 02a6f9dd941131e4d85d39332183eeb6, type: 3}
-  strongHitFx: {fileID: 1791144729913606, guid: 4e857e4ca7072874ea6f813587ce3d60, type: 3}
-  criticalHitFx: {fileID: 1796368087707688, guid: 62287e9b80552c143a473e54d74f11e8, type: 3}
+  missFx: {fileID: 1576508625749478, guid: a619fc9eccbe6d242a5a7f82bbb584be, type: 3}
+  lightHitFx: {fileID: 1137603909547500, guid: 106c729e6a225324fbfcd3790a15051e, type: 3}
+  strongHitFx: {fileID: 1137603909547500, guid: 106c729e6a225324fbfcd3790a15051e, type: 3}
+  criticalHitFx: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
