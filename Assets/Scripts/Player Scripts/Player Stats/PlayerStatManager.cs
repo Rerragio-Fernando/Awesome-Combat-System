@@ -8,10 +8,10 @@ public class PlayerStatManager : MonoBehaviour
 
     public Hit GetHitProbability()
     {
-        float miss = playerStatData.missThreshold;
-        float light = playerStatData.lightThreshold;
-        float strong = playerStatData.strongThreshold;
-        float critical = playerStatData.criticalThreshold;
+        float miss = UnityEngine.Random.Range(0f, playerStatData.missThreshold);
+        float light = UnityEngine.Random.Range(0f, playerStatData.lightThreshold);
+        float strong = UnityEngine.Random.Range(0f, playerStatData.strongThreshold);
+        float critical = UnityEngine.Random.Range(0f, playerStatData.criticalThreshold);
 
         float maxValue = Math.Max(miss, Math.Max(light, Math.Max(strong, critical)));
 
