@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbb7b3ea2bfd7b428875e565751eaa2, type: 3}
   m_Name: PlayerStatData
   m_EditorClassIdentifier: 
+  playerMaxHP: 100
   missThreshold: 0.1
+  missMagnitude: 0
   lightThreshold: 0.7
+  lightMagnitude: 0.5
   strongThreshold: 0.5
-  criticalThreshold: 0.3
+  strongMagnitude: 1
+  criticalThreshold: 0.1
+  criticalMagnitude: 5

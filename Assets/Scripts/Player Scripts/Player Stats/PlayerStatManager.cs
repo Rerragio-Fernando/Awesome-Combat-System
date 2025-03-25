@@ -17,19 +17,19 @@ public class PlayerStatManager : MonoBehaviour
 
         if(miss == maxValue)
         {
-            return new Hit(HitLevel.MISS, 0f);
+            return new Hit(HitLevel.MISS, playerStatData.missMagnitude);
         }
         else if(light == maxValue)
         {
-            return new Hit(HitLevel.LIGHT, maxValue);   
+            return new Hit(HitLevel.LIGHT, playerStatData.lightMagnitude);   
         }
         else if(strong == maxValue)
         {
-            return new Hit(HitLevel.STRONG, maxValue);   
+            return new Hit(HitLevel.STRONG, playerStatData.strongMagnitude);   
         }
         else
         {
-            return new Hit(HitLevel.CRITICAL, maxValue);   
+            return new Hit(HitLevel.CRITICAL, playerStatData.criticalMagnitude);   
         }
     }
 }

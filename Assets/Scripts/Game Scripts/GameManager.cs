@@ -12,6 +12,6 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void Start() 
     {
-        _player = Instantiate(_playerPrefab, _spawnPoint.position, _spawnPoint.rotation);    
+        _player = Instantiate(_playerPrefab, _spawnPoint.position, Quaternion.identity);    
     }    
 }
