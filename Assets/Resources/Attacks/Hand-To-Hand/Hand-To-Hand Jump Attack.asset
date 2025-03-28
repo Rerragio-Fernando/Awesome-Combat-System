@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHitForce: 30
   maxHitDamage: 0
-  forwardStep: 5
+  forwardStep: 10
   nextMeleeAttackTimeWindow: 0.25
   checkSphereRadius: 0.5
   hitLayerMask:

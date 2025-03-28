@@ -31,6 +31,8 @@ public class Movement : MonoBehaviour
     protected Vector2 movementIN;
     protected bool aimIN;
     protected bool sprintIN;
+    
+    protected bool isAttacking; 
 
     public float movementModifier = 1f;
     public float stepMultiplier = 1f;
@@ -58,9 +60,12 @@ public class Movement : MonoBehaviour
     protected virtual void Update() 
     {
         Grounded();
-        PlayerMovementFunction();
+
+        if(!isAttacking)
+            PlayerMovementFunction();
 
         cont.Move(velocity * Time.deltaTime);
+        ApplyFriction();
     }
 
     void Grounded()
@@ -102,7 +107,6 @@ public class Movement : MonoBehaviour
         else
         {
             sprintIN = false;
-            ApplyFriction();
         }
     }
 
@@ -119,7 +123,7 @@ public class Movement : MonoBehaviour
 
     public void ForwardStep()
     {
-        velocity += transform.TransformDirection(Vector3.forward) * stepMultiplier; 
+        velocity = transform.TransformDirection(Vector3.forward) * stepMultiplier; 
     }
 
     protected void ModifyMovement(float val)

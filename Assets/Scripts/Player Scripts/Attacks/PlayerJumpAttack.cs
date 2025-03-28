@@ -22,8 +22,7 @@ public class PlayerJumpAttack : MeleeAttack
 
         if(controller != null)
         {
-            controller.BasicAttack += Attack;
-            controller.StrongAttack += Attack;
+            controller.AttackEvent += Attack;
 
             controller.ResetAction += ResetAnimationState;
         }
@@ -37,8 +36,7 @@ public class PlayerJumpAttack : MeleeAttack
 
         if(controller != null)
         {
-            controller.BasicAttack -= Attack;
-            controller.StrongAttack -= Attack;
+            controller.AttackEvent -= Attack;
 
             controller.ResetAction -= ResetAnimationState;
         }
@@ -65,6 +63,7 @@ public class PlayerJumpAttack : MeleeAttack
         if(!sprintIN || movementIN.normalized.magnitude <= 0.25f) return;
 
         sprintIN = false;
+        
         base.Attack();
         controller.ModifyMovement(movementModifier);
         controller.ModifyLook(lookModifier);

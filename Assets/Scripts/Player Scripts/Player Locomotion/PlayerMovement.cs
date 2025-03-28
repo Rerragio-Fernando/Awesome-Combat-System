@@ -17,6 +17,10 @@ public class PlayerMovement : MovementAnimator
 
         if(controller != null)
         {
+            controller.AttackEvent += Attack;
+
+            controller.ResetAction += ResetAttackBool;
+
             controller.ModifyMovement += ModifyMovement;
             controller.ModifyForwardStep += ModifyForwardStep;
         }
@@ -30,9 +34,23 @@ public class PlayerMovement : MovementAnimator
 
         if(controller != null)
         {
+            controller.AttackEvent -= Attack;
+
+            controller.ResetAction -= ResetAttackBool;
+
             controller.ModifyMovement -= ModifyMovement;
             controller.ModifyForwardStep -= ModifyForwardStep;
         }
+    }
+
+    private void Attack()
+    {
+        isAttacking = true;
+    }
+
+    private void ResetAttackBool()
+    {
+        isAttacking = false;
     }
 
     #region Input Functions

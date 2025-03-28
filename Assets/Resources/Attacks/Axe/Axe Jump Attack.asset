@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe8600faa8ed7d4ebdbc41e2ef1f102, type: 3}
   m_Name: Axe Jump Attack
   m_EditorClassIdentifier: 
-  maxHitForce: 200
+  maxHitForce: 100
   maxHitDamage: 0
-  forwardStep: 10
+  forwardStep: 20
   nextMeleeAttackTimeWindow: 0.25
   checkSphereRadius: 2
   hitLayerMask:
