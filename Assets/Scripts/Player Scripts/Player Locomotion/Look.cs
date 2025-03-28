@@ -10,6 +10,7 @@ public class Look : MonoBehaviour
     [SerializeField] protected float lookLimitter;
 
     private float horizontalRot;
+    private float horizontalRotCam;
     private float rotation;
     private float verticalRot;
 
@@ -29,6 +30,9 @@ public class Look : MonoBehaviour
     {
         VerticalLook();
         HorizontalLook();
+
+        // Update camera target rotation
+        cameraTarget.eulerAngles = new Vector3(verticalRot, horizontalRot, 0f);
     }
 
     void VerticalLook()
@@ -39,9 +43,6 @@ public class Look : MonoBehaviour
             lookData.minRotation,
             lookData.maxRotation
         );
-
-        // Update camera target rotation
-        cameraTarget.eulerAngles = new Vector3(verticalRot, horizontalRot, 0f);
     }
 
     void HorizontalLook()

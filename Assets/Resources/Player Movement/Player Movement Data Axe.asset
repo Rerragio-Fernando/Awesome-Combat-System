@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMass: 30
   walkSpeed: 2
-  runSpeed: 5
-  forwardStepSpeed: 5
+  runSpeed: 10

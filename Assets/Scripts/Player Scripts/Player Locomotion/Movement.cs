@@ -37,6 +37,9 @@ public class Movement : MonoBehaviour
 
     public Action<PlayerMovementData> ChangePlayerMovementEvent;
 
+    //Interface Variables
+    private bool overrideMovement;
+
     private void Start() 
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -84,13 +87,12 @@ public class Movement : MonoBehaviour
         // Handle movement and animation states
         if(movDir.magnitude > 0.25f && isGrounded)
         {
-            if(sprintIN && (movDir.z > 0f && (movDir.x < 0.25f && movDir.x > -0.25f)))
+            if(sprintIN)
             {
                 moveSpeed = movementData.runSpeed;
             }
             else
             {
-                sprintIN = false;
                 moveSpeed = movementData.walkSpeed;
             }
             Vector3 moveDirection = Quaternion.Euler(0f, targAngle, 0f) * Vector3.forward;
@@ -117,7 +119,7 @@ public class Movement : MonoBehaviour
 
     public void ForwardStep()
     {
-        velocity += transform.forward * stepMultiplier; 
+        velocity += transform.TransformDirection(Vector3.forward) * stepMultiplier; 
     }
 
     protected void ModifyMovement(float val)

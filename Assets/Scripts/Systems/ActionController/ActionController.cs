@@ -24,6 +24,8 @@ public class ActionController : MonoBehaviour
 {
     [SerializeField, Tooltip("Time interval that will discard the next combat state of player")]
     private float timeCheck;
+
+    public Action AttackEvent;
     
     public Action BasicAttack;
     public Action StrongAttack;
@@ -126,10 +128,12 @@ public class ActionController : MonoBehaviour
         {
             case PlayerCombatState.PLAYER_BASIC_ATTACK:
                 BasicAttack?.Invoke();
+                AttackEvent?.Invoke();
                 break;
 
             case PlayerCombatState.PLAYER_STRONG_ATTACK:
                 StrongAttack?.Invoke();
+                AttackEvent?.Invoke();
                 break;
             
             case PlayerCombatState.PLAYER_GUARD:

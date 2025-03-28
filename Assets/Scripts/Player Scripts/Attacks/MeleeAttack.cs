@@ -116,7 +116,8 @@ public class MeleeAttack : CombatAnimation
         Collider[] hitColliders = Physics.OverlapSphere(hitPoint.position, attackData[attackIndex].checkSphereRadius, attackData[attackIndex].hitLayerMask);
         foreach (var hitCollider in hitColliders)
         {
-            hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * force, ForceMode.Impulse);
+            Vector3 forceDirection = hitCollider.transform.position - hitPoint.position;
+            hitCollider.gameObject.GetComponent<Rigidbody>().AddForce(forceDirection * force, ForceMode.Impulse);
 
             var hitFx = Instantiate(attackHitFx, hitPoint.position, Quaternion.identity);
         }
