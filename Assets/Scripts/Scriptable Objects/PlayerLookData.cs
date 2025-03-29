@@ -11,4 +11,7 @@ public class PlayerLookData : ScriptableObject
 
     [Tooltip("Player Look Sensitivity")]
     public float aimSensitivity;
+
+    [Tooltip("Lock Out Threshold")] 
+    public float lockOutThreshold;
 }

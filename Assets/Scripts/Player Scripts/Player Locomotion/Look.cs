@@ -5,6 +5,8 @@ using UnityEngine;
 public class Look : MonoBehaviour
 {
     [SerializeField] private Transform cameraTarget;
+    [SerializeField] private Transform testTarget;
+
     [SerializeField] private PlayerLookData lookData;
     [SerializeField] private float turnSmoothTime;
     [SerializeField] protected float lookLimitter;
@@ -15,10 +17,13 @@ public class Look : MonoBehaviour
     private float verticalRot;
 
     private float lookModifier = 1f;
+    private float lockOutCounter = 0f;
 
     //Input Variables
     protected Vector2 lookIN;
     protected bool notAttacking;
+
+    Quaternion lookRotation;
 
     private void Start() 
     {
@@ -26,8 +31,35 @@ public class Look : MonoBehaviour
         horizontalRot = transform.rotation.y;
     }
 
+    private void LockOutCheck()
+    {
+        float magnitude = lookIN.normalized.magnitude;
+
+        if(magnitude == 0f)
+        {
+            lockOutCounter = 0f;
+            return;
+        }
+
+        lockOutCounter += lookIN.normalized.magnitude;
+
+        if(lockOutCounter >= lookData.lockOutThreshold)
+        {
+            testTarget = null;
+            lockOutCounter = 0f;
+            return;
+        }
+    }
+
     private void Update() 
     {
+        if(testTarget != null)
+        {
+            LockOutCheck();
+            HandleLookAtTarget(); 
+            return;
+        }
+
         VerticalLook();
         HorizontalLook();
 
@@ -50,6 +82,16 @@ public class Look : MonoBehaviour
         horizontalRot += lookIN.x * lookData.aimSensitivity * lookModifier;
         rotation = Mathf.Lerp(rotation, horizontalRot, turnSmoothTime * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0f, rotation, 0f);
+    }
+
+    void HandleLookAtTarget()
+    {
+        Vector3 direction = testTarget.position - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        rotation.x = rotation.z = 0f;
+
+        lookRotation = Quaternion.Lerp(lookRotation, rotation, turnSmoothTime * Time.deltaTime);
+        transform.rotation = lookRotation;
     }
 
     protected void ModifyLook(float val)

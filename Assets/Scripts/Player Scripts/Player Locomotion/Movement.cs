@@ -90,7 +90,7 @@ public class Movement : MonoBehaviour
         targAngle = Mathf.Atan2(movDir.x, movDir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
 
         // Handle movement and animation states
-        if(movDir.magnitude > 0.25f && isGrounded)
+        if(movDir.magnitude > 0.5f && isGrounded)
         {
             if(sprintIN)
             {
