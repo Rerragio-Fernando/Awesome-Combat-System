@@ -2903,6 +2903,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundTrans: {fileID: 1774116576499877692}
+  playerGraphics: {fileID: 5370410311610983525}
   movementModifier: 1
   stepMultiplier: 1
   movementParameterName: Movement
@@ -2936,7 +2937,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTarget: {fileID: 1849522058008274733}
+  playerGraphics: {fileID: 5370410311610983525}
   lookData: {fileID: 11400000, guid: cc39acbaa7ffbf04a8819eff7ed986e2, type: 2}
+  lookAtLayer:
+    serializedVersion: 2
+    m_Bits: 9
+  rayCastDistance: 100
   turnSmoothTime: 5
   lookLimitter: 1
 --- !u!114 &6311284351836166276

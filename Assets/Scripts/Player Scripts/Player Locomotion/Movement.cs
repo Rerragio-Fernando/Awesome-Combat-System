@@ -16,6 +16,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float distanceToGround;//
     [SerializeField] private LayerMask groundLayer;//
     [SerializeField] private Transform groundTrans;
+    
+    [SerializeField] private Transform playerGraphics;
 
     private float targAngle;
     private float moveSpeed = 0f;
@@ -39,14 +41,14 @@ public class Movement : MonoBehaviour
 
     public Action<PlayerMovementData> ChangePlayerMovementEvent;
 
-    //Interface Variables
-    private bool overrideMovement;
+    private Look look;
 
     private void Start() 
     {
         Cursor.lockState = CursorLockMode.Locked;
         cont = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        look = GetComponent<Look>();
     }
 
     protected virtual void OnEnable() {
@@ -123,7 +125,7 @@ public class Movement : MonoBehaviour
 
     public void ForwardStep()
     {
-        velocity = transform.TransformDirection(Vector3.forward) * stepMultiplier; 
+        velocity = playerGraphics.TransformDirection(Vector3.forward) * stepMultiplier; 
     }
 
     protected void ModifyMovement(float val)

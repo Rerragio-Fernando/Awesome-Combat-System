@@ -5,9 +5,11 @@ using UnityEngine;
 public class Look : MonoBehaviour
 {
     [SerializeField] private Transform cameraTarget;
-    [SerializeField] private Transform testTarget;
-
+    [SerializeField] private Transform playerGraphics;
     [SerializeField] private PlayerLookData lookData;
+    
+    [SerializeField] private LayerMask lookAtLayer;
+    [SerializeField] private float rayCastDistance;
     [SerializeField] private float turnSmoothTime;
     [SerializeField] protected float lookLimitter;
 
@@ -15,13 +17,15 @@ public class Look : MonoBehaviour
     private float horizontalRotCam;
     private float rotation;
     private float verticalRot;
+    
+    private Camera playerCamera;
 
     private float lookModifier = 1f;
     private float lockOutCounter = 0f;
 
     //Input Variables
     protected Vector2 lookIN;
-    protected bool notAttacking;
+    protected Vector3 aimPoint;
 
     Quaternion lookRotation;
 
@@ -29,49 +33,40 @@ public class Look : MonoBehaviour
     {
         verticalRot = cameraTarget.eulerAngles.x;
         horizontalRot = transform.rotation.y;
+        
+        playerCamera = Camera.main;
     }
 
-    private void LockOutCheck()
+    private void Update()
     {
-        float magnitude = lookIN.normalized.magnitude;
-
-        if(magnitude == 0f)
-        {
-            lockOutCounter = 0f;
-            return;
-        }
-
-        lockOutCounter += lookIN.normalized.magnitude;
-
-        if(lockOutCounter >= lookData.lockOutThreshold)
-        {
-            testTarget = null;
-            lockOutCounter = 0f;
-            return;
-        }
-    }
-
-    private void Update() 
-    {
-        if(testTarget != null)
-        {
-            LockOutCheck();
-            HandleLookAtTarget(); 
-            return;
-        }
-
+        Raycast();
+        
         VerticalLook();
         HorizontalLook();
 
+        RotatePlayerGraphics();
+
         // Update camera target rotation
         cameraTarget.eulerAngles = new Vector3(verticalRot, horizontalRot, 0f);
+    }
+
+    void Raycast()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        RaycastHit hit;
+
+        // Use the aim layer mask in the raycast
+        if (Physics.Raycast(ray, out hit, rayCastDistance, lookAtLayer)) // If we hit something
+        {
+            aimPoint = hit.point; // Set aim point to the hit position
+        }
     }
 
     void VerticalLook()
     {
         // Calculate and clamp vertical rotation for the camera target
         verticalRot = Mathf.Clamp(
-            verticalRot - (lookIN.y * lookData.aimSensitivity * lookModifier),
+            verticalRot - (lookIN.y * lookData.aimSensitivity * 1f),
             lookData.minRotation,
             lookData.maxRotation
         );
@@ -79,19 +74,16 @@ public class Look : MonoBehaviour
 
     void HorizontalLook()
     {
-        horizontalRot += lookIN.x * lookData.aimSensitivity * lookModifier;
+        horizontalRot += lookIN.x * lookData.aimSensitivity * 1f;
         rotation = Mathf.Lerp(rotation, horizontalRot, turnSmoothTime * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0f, rotation, 0f);
     }
 
-    void HandleLookAtTarget()
+    private void RotatePlayerGraphics()
     {
-        Vector3 direction = testTarget.position - transform.position;
-        Quaternion rotation = Quaternion.LookRotation(direction);
-        rotation.x = rotation.z = 0f;
-
-        lookRotation = Quaternion.Lerp(lookRotation, rotation, turnSmoothTime * Time.deltaTime);
-        transform.rotation = lookRotation;
+        Quaternion targetRotation = Quaternion.LookRotation(aimPoint - playerGraphics.position);
+        targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+        playerGraphics.rotation = Quaternion.Slerp(playerGraphics.rotation, targetRotation, Time.deltaTime * 10f);
     }
 
     protected void ModifyLook(float val)

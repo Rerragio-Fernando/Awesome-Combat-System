@@ -15,3 +15,10 @@ public class PlayerLookData : ScriptableObject
     [Tooltip("Lock Out Threshold")] 
     public float lockOutThreshold;
 }
+/*
+2 Options:
+>Lock on target when player crosshair hovers over enemy for n seconds
+>Lock on target when player attacks an enemy
+
+Lock onto the enemy where the players crosshair lands on
+*/

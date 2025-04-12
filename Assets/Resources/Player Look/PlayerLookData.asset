@@ -15,3 +15,4 @@ MonoBehaviour:
   minRotation: -40
   maxRotation: 40
   aimSensitivity: 1.5
+  lockOutThreshold: 30
