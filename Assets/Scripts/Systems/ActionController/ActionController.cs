@@ -53,22 +53,12 @@ public class ActionController : MonoBehaviour
     /// </summary>
     private bool running = false;
 
-    private void OnEnable() {
-        PlayerInputHandler.BasicAttackEvent += (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_BASIC_ATTACK);
-        PlayerInputHandler.StrongAttackEvent += (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
-
-        PlayerInputHandler.GuardEvent += (phase) => SetNextStateHold(phase, PlayerCombatState.PLAYER_GUARD);
-
-        PlayerInputHandler.CycleWeaponEvent += (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_WEAPON_CYCLE);
+    protected virtual void OnEnable() {
+        
     }
 
-    private void OnDisable() {
-        PlayerInputHandler.BasicAttackEvent -= (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_BASIC_ATTACK);
-        PlayerInputHandler.StrongAttackEvent -= (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_STRONG_ATTACK);
-
-        PlayerInputHandler.GuardEvent -= (phase) => SetNextStateHold(phase, PlayerCombatState.PLAYER_GUARD);
-
-        PlayerInputHandler.CycleWeaponEvent -= (phase) => SetNextStateTap(phase, PlayerCombatState.PLAYER_WEAPON_CYCLE);
+    protected virtual void OnDisable() {
+        
     }
 
     private void Update() {
@@ -80,7 +70,7 @@ public class ActionController : MonoBehaviour
     /// </summary>
     /// <param name="phase">Input action phase</param>
     /// <param name="nextCombatState">The next combat state</param>
-    private void SetNextStateTap(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
+    protected void SetNextStateTap(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
     {
         if(running)
         {
@@ -95,7 +85,7 @@ public class ActionController : MonoBehaviour
         }        
     }
 
-    private void SetNextStateHold(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
+    protected void SetNextStateHold(InputActionPhase phase, PlayerCombatState nextCombatState = PlayerCombatState.PLAYER_IDLE)
     {
         if(phase == InputActionPhase.Performed)
         {
